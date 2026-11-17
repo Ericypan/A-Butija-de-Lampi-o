@@ -1,0 +1,3275 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Butija de Lampião — A Sombra dos 100 Anos | RPG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Rye&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #110c09;
+      --bg-panel: #1b1410;
+      --bg-card: #241b15;
+      --border-warm: #4a3525;
+      --gold: #d99b38;
+      --gold-soft: #f0c26b;
+      --rust: #b54024;
+      --rust-bright: #d95232;
+      --sulfur: #94ad42;
+      --parchment: #f3ead8;
+      --parchment-dark: #e4d4b7;
+      --ink: #241811;
+      --ink-muted: #5c4534;
+      --text-light: #efe5d4;
+      --text-muted: #bca992;
+      --radius: 10px;
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at 18% 12%, rgba(217, 155, 56, 0.08), transparent 40%),
+        radial-gradient(circle at 82% 30%, rgba(148, 173, 66, 0.06), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(181, 64, 36, 0.08), transparent 50%);
+      color: var(--text-light);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .font-cinzel {
+      font-family: 'Cinzel', Georgia, serif;
+      letter-spacing: 0.03em;
+    }
+
+    .font-rye {
+      font-family: 'Rye', 'Cinzel', Georgia, serif;
+    }
+
+    .font-serif {
+      font-family: 'Crimson Pro', Georgia, serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(17, 12, 9, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-warm);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      color: var(--gold);
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--rust), #7a2310);
+      color: #fff4e0;
+      font-size: 0.68rem;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid rgba(240, 194, 107, 0.35);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-soft);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #b7771d);
+      color: #1c1209;
+      border-color: #f3cc7b;
+      box-shadow: 0 4px 18px rgba(217, 155, 56, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.07);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-light);
+      border-color: var(--border-warm);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold-soft);
+      background: rgba(217, 155, 56, 0.08);
+    }
+
+    .btn-rust {
+      background: linear-gradient(135deg, var(--rust-bright), var(--rust));
+      color: #fff6ec;
+      border-color: rgba(255, 195, 160, 0.3);
+    }
+
+    .btn-rust:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.78rem;
+      font-size: 0.8rem;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 3.5rem 0 4.5rem;
+      position: relative;
+      border-bottom: 1px solid var(--border-warm);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(217, 155, 56, 0.12);
+      border: 1px solid rgba(217, 155, 56, 0.35);
+      color: var(--gold-soft);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.2vw, 3.55rem);
+      line-height: 1.08;
+      color: var(--gold-soft);
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      color: #d6855c;
+      margin-bottom: 1.25rem;
+      font-weight: 700;
+    }
+
+    .hero-lead {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.24rem;
+      color: #e4d7c5;
+      margin-bottom: 1.65rem;
+      max-width: 60ch;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.9rem;
+    }
+
+    .stat-pill {
+      background: rgba(36, 27, 21, 0.85);
+      border: 1px solid var(--border-warm);
+      border-radius: 8px;
+      padding: 0.7rem 0.6rem;
+      text-align: center;
+    }
+
+    .stat-pill strong {
+      display: block;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+    }
+
+    .stat-pill span {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    /* COVER FRAME */
+    .cover-frame {
+      position: relative;
+      background: linear-gradient(160deg, #271b13, #130d09);
+      border: 2px solid rgba(217, 155, 56, 0.45);
+      border-radius: 14px;
+      padding: 0.75rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(148, 173, 66, 0.12);
+    }
+
+    .cover-img-wrap {
+      position: relative;
+      border-radius: 9px;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #332316, #120c08);
+      aspect-ratio: 2048 / 1143;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cover-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cover-fallback {
+      padding: 1.75rem;
+      text-align: center;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      height: 100%;
+      border: 2px dashed rgba(217, 155, 56, 0.35);
+      border-radius: 8px;
+    }
+
+    .cover-fallback.visible {
+      display: flex;
+    }
+
+    .cover-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 0.65rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid rgba(74, 53, 37, 0.55);
+    }
+
+    .section-header {
+      margin-bottom: 2.3rem;
+      max-width: 780px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      color: #f7ead4;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* LORE BANNER */
+    .lore-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .lore-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+    }
+
+    .lore-card p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #eadcc7;
+    }
+
+    .lore-pillars {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .pillar {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid var(--gold);
+      padding: 0.85rem 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .pillar strong {
+      color: var(--gold-soft);
+      display: block;
+      margin-bottom: 0.2rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+    }
+
+    .scene-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scene-img-wrap {
+      position: relative;
+      flex: 1;
+      min-height: 250px;
+      background: linear-gradient(180deg, #3b242c 0%, #2a1912 65%, #160e0a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scene-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .scene-info {
+      padding: 1.25rem;
+      border-top: 1px solid var(--border-warm);
+      background: #17110d;
+    }
+
+    .scene-info h3 {
+      color: var(--gold-soft);
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .scene-info p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* RITUAL PROFANO BOX */
+    .ritual-feature {
+      margin-top: 2rem;
+      background: var(--bg-panel);
+      border: 1.5px solid rgba(148, 173, 66, 0.5);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: stretch;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(148, 173, 66, 0.1);
+    }
+
+    .ritual-img-wrap {
+      position: relative;
+      background: #120d0a;
+      aspect-ratio: 2048 / 1143;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ritual-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ritual-info {
+      padding: 1.65rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.65rem;
+      border-left: 1px solid var(--border-warm);
+      background: #17110d;
+    }
+
+    .ritual-info h3 {
+      color: var(--gold-soft);
+      font-size: 1.18rem;
+    }
+
+    .ritual-info p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.12rem;
+      color: #e6d7c3;
+    }
+
+    /* GRID HELPERS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.35rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.15rem;
+    }
+
+    .card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(217, 155, 56, 0.55);
+    }
+
+    .card h3 {
+      color: var(--gold-soft);
+      font-size: 1.12rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+    }
+
+    .badge-gold { background: rgba(217, 155, 56, 0.14); color: var(--gold-soft); border-color: rgba(217, 155, 56, 0.35); }
+    .badge-rust { background: rgba(181, 64, 36, 0.2); color: #ffb39f; border-color: rgba(217, 82, 50, 0.4); }
+    .badge-water { background: rgba(56, 152, 217, 0.16); color: #8ad4ff; border-color: rgba(88, 177, 235, 0.4); }
+    .badge-earth { background: rgba(155, 118, 83, 0.2); color: #e2c09d; border-color: rgba(173, 134, 98, 0.4); }
+    .badge-air { background: rgba(170, 200, 215, 0.14); color: #d6eef8; border-color: rgba(170, 200, 215, 0.35); }
+    .badge-fauna { background: rgba(204, 122, 45, 0.18); color: #ffc58a; border-color: rgba(204, 122, 45, 0.4); }
+    .badge-flora { background: rgba(102, 163, 65, 0.18); color: #b5e893; border-color: rgba(124, 194, 81, 0.4); }
+    .badge-steel { background: rgba(180, 180, 190, 0.15); color: #e1e1ea; border-color: rgba(180, 180, 190, 0.35); }
+
+    /* SYSTEM RULES */
+    .formula-box {
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(217, 155, 56, 0.25);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .formula-box strong {
+      color: var(--gold-soft);
+      display: block;
+      font-size: 0.92rem;
+    }
+
+    .formula-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85rem;
+      color: #ffd992;
+      background: rgba(217, 155, 56, 0.1);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .cd-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.88rem;
+    }
+
+    .cd-table th, .cd-table td {
+      padding: 0.55rem 0.7rem;
+      border-bottom: 1px solid rgba(74, 53, 37, 0.6);
+      text-align: left;
+    }
+
+    .cd-table th {
+      color: var(--gold-soft);
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+    }
+
+    /* CLASSES */
+    .class-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .class-bonuses {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+      font-size: 0.9rem;
+      color: #e4d8c5;
+      margin: 0.75rem 0;
+    }
+
+    .class-bonuses li {
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .class-bonuses li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.75rem;
+      top: 0.15rem;
+    }
+
+    /* PACTOS */
+    .pact-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .pact-dom {
+      font-size: 0.89rem;
+      color: #e9decb;
+      background: rgba(148, 173, 66, 0.08);
+      border-left: 3px solid var(--sulfur);
+      padding: 0.6rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .pact-tabu {
+      font-size: 0.86rem;
+      color: #f3c4b8;
+      background: rgba(181, 64, 36, 0.12);
+      border-left: 3px solid var(--rust-bright);
+      padding: 0.6rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* ÚLTIMA PEIA */
+    .peia-banner {
+      background: linear-gradient(135deg, rgba(130, 32, 16, 0.32), rgba(27, 20, 16, 0.95));
+      border: 1px solid rgba(217, 82, 50, 0.45);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .peia-quote {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--gold-soft);
+      border-left: 3px solid var(--rust-bright);
+      padding-left: 1rem;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .step-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .step-item {
+      background: rgba(15, 10, 8, 0.65);
+      border: 1px solid rgba(217, 82, 50, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .step-num {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--rust);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-align: center;
+      line-height: 24px;
+      margin-right: 0.45rem;
+    }
+
+    /* PODERES FILTER & GRIMÓRIO */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      background: var(--bg-panel);
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-warm);
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      border: 1px solid var(--border-warm);
+      padding: 0.42rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--gold);
+      color: #1c1209;
+      border-color: var(--gold-soft);
+    }
+
+    .search-input {
+      background: #120d0a;
+      border: 1px solid var(--border-warm);
+      color: var(--text-light);
+      padding: 0.48rem 0.8rem;
+      border-radius: 7px;
+      font-size: 0.86rem;
+      min-width: 220px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .power-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .power-card.selected-power {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold), 0 10px 25px rgba(217, 155, 56, 0.14);
+    }
+
+    .power-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .power-desc {
+      font-size: 0.9rem;
+      color: #e4d8c5;
+    }
+
+    /* CONSTRUTOR DE PERSONAGEM */
+    .builder-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.12fr;
+      gap: 1.75rem;
+      align-items: start;
+    }
+
+    .builder-panel {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-warm);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .builder-group {
+      border-bottom: 1px solid rgba(74, 53, 37, 0.6);
+      padding-bottom: 1.25rem;
+    }
+
+    .builder-group:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .builder-group h3 {
+      color: var(--gold-soft);
+      font-size: 1.02rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      background: #130d0a;
+      border: 1px solid var(--border-warm);
+      color: var(--text-light);
+      padding: 0.5rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-family: inherit;
+    }
+
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .attr-stepper-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .attr-control {
+      background: #140e0b;
+      border: 1px solid var(--border-warm);
+      border-radius: 8px;
+      padding: 0.65rem 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .attr-control strong {
+      color: var(--gold-soft);
+      font-family: 'Cinzel', serif;
+      font-size: 0.92rem;
+      display: block;
+    }
+
+    .attr-control small {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      display: block;
+    }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .stepper button {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border-warm);
+      background: var(--bg-card);
+      color: var(--text-light);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .stepper button:hover:not(:disabled) {
+      border-color: var(--gold);
+      color: var(--gold-soft);
+    }
+
+    .stepper button:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .stepper span {
+      min-width: 24px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #fff;
+    }
+
+    .alert-box {
+      padding: 0.7rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      margin-top: 0.6rem;
+    }
+
+    .alert-warn {
+      background: rgba(181, 64, 36, 0.2);
+      border: 1px solid rgba(217, 82, 50, 0.5);
+      color: #ffc8b8;
+    }
+
+    .alert-ok {
+      background: rgba(148, 173, 66, 0.14);
+      border: 1px solid rgba(148, 173, 66, 0.45);
+      color: #d9ee9b;
+    }
+
+    .selected-powers-list {
+      display: grid;
+      gap: 0.55rem;
+      margin-top: 0.65rem;
+    }
+
+    .selected-chip {
+      background: #140e0b;
+      border: 1px solid var(--border-warm);
+      border-radius: 7px;
+      padding: 0.55rem 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    /* FICHA OFICIAL ESTILO PERGAMINHO (ESPELHO DA FICHA PDF) */
+    .sheet-wrapper {
+      background: var(--parchment);
+      color: var(--ink);
+      border: 3px solid #6b4c30;
+      border-radius: 8px;
+      padding: 1.35rem;
+      box-shadow: var(--shadow-lg);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .sheet-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.85rem;
+      align-items: center;
+      border-bottom: 2px solid #593b22;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .sheet-stamp {
+      border: 1.5px solid #593b22;
+      background: var(--parchment-dark);
+      padding: 0.3rem 0.55rem;
+      font-size: 0.66rem;
+      font-weight: 800;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1.2;
+      border-radius: 4px;
+      color: #422917;
+    }
+
+    .sheet-title {
+      text-align: center;
+    }
+
+    .sheet-title h3 {
+      font-family: 'Rye', 'Cinzel', serif;
+      color: #2b180c;
+      font-size: 1.3rem;
+      letter-spacing: 0.03em;
+    }
+
+    .sheet-title p {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #7c351c;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .sheet-meta-lines {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.55rem;
+      background: rgba(139, 102, 65, 0.1);
+      border: 1px solid #9d7e5c;
+      padding: 0.55rem 0.7rem;
+      border-radius: 5px;
+      margin-bottom: 0.85rem;
+      font-size: 0.76rem;
+    }
+
+    .sheet-meta-lines div strong {
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      color: #5e422b;
+      display: block;
+    }
+
+    .sheet-meta-lines div span {
+      font-weight: 700;
+      color: #1f1209;
+    }
+
+    .sheet-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .sheet-box {
+      border: 1.5px solid #6b4c30;
+      background: rgba(255, 250, 240, 0.55);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .sheet-box-title {
+      background: #47301e;
+      color: #f9eed9;
+      padding: 0.3rem 0.6rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    .sheet-box-title.rust-bar {
+      background: #7c2d17;
+    }
+
+    .sheet-box-body {
+      padding: 0.6rem;
+      font-size: 0.78rem;
+    }
+
+    .sheet-attrs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.45rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .sheet-attr-cell {
+      border: 1.5px solid #6b4c30;
+      background: #ebd9bd;
+      border-radius: 4px;
+      text-align: center;
+      padding: 0.35rem 0.2rem;
+    }
+
+    .sheet-attr-cell label {
+      display: block;
+      font-size: 0.64rem;
+      font-weight: 800;
+      color: #472e1b;
+    }
+
+    .sheet-attr-cell strong {
+      display: block;
+      font-size: 1.3rem;
+      font-family: 'Cinzel', serif;
+      color: #1e1008;
+      line-height: 1.15;
+    }
+
+    .sheet-attr-cell span {
+      display: block;
+      font-size: 0.6rem;
+      color: #6b4c30;
+    }
+
+    .sheet-derived-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .derived-card {
+      border: 1px solid #967754;
+      background: #faf3e4;
+      border-radius: 4px;
+      padding: 0.35rem 0.45rem;
+    }
+
+    .derived-card-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.66rem;
+      font-weight: 800;
+      color: #4c331e;
+    }
+
+    .derived-values {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.2rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .derived-values input {
+      width: 44px;
+      border: none;
+      border-bottom: 1.5px solid #5c3f26;
+      background: transparent;
+      text-align: center;
+      font-weight: 700;
+      color: #1b0f07;
+      font-size: 0.92rem;
+    }
+
+    .luck-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.28rem;
+      margin-top: 0.35rem;
+    }
+
+    .luck-dot {
+      width: 15px;
+      height: 15px;
+      border: 1.5px solid #5c3f26;
+      border-radius: 3px;
+      cursor: pointer;
+      background: #fff8eb;
+    }
+
+    .luck-dot.used {
+      background: #7c2d17;
+      border-color: #4f1b0d;
+    }
+
+    .sheet-check-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      align-items: center;
+      margin: 0.35rem 0;
+      font-size: 0.74rem;
+    }
+
+    .sheet-check-row label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .sheet-powers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .sheet-power-slot {
+      border: 1px solid #967754;
+      background: #fbf5e8;
+      border-radius: 4px;
+      padding: 0.45rem;
+      min-height: 92px;
+      font-size: 0.72rem;
+    }
+
+    .sheet-power-slot strong {
+      display: block;
+      color: #2f1a0d;
+      font-size: 0.76rem;
+      border-bottom: 1px dashed #b99b78;
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .sheet-textarea {
+      width: 100%;
+      border: 1px solid #b59774;
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 4px;
+      padding: 0.38rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      color: #22140a;
+      resize: vertical;
+    }
+
+    .sheet-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+    }
+
+    .sheet-table th {
+      text-align: left;
+      font-size: 0.64rem;
+      color: #573b24;
+      border-bottom: 1px solid #8a6a47;
+      padding: 0.2rem 0.25rem;
+    }
+
+    .sheet-table td {
+      border-bottom: 1px solid #ccb493;
+      padding: 0.22rem 0.25rem;
+    }
+
+    .sheet-table input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 0.72rem;
+      color: #1f1209;
+    }
+
+    .sheet-footer-note {
+      margin-top: 0.65rem;
+      padding-top: 0.45rem;
+      border-top: 1px solid #9d7e5c;
+      font-size: 0.68rem;
+      color: #5c422c;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .sheet-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.9rem;
+    }
+
+    /* FLOATING DICE ROLLER */
+    .dice-fab {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 150;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
+    }
+
+    .dice-drawer {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 4.5rem;
+      width: min(350px, 92vw);
+      background: #1b1410;
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 1.1rem;
+      z-index: 160;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      display: none;
+    }
+
+    .dice-drawer.open {
+      display: block;
+    }
+
+    .dice-log {
+      background: #110c09;
+      border: 1px solid var(--border-warm);
+      border-radius: 7px;
+      padding: 0.7rem;
+      margin-top: 0.75rem;
+      font-size: 0.84rem;
+      min-height: 68px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-grid, .lore-grid, .ritual-feature, .builder-layout {
+        grid-template-columns: 1fr;
+      }
+      .ritual-info {
+        border-left: none;
+        border-top: 1px solid var(--border-warm);
+      }
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3, .step-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-2, .grid-3, .grid-4, .step-list,
+      .sheet-two-col, .sheet-meta-lines, .sheet-powers-grid,
+      .form-grid, .attr-stepper-grid {
+        grid-template-columns: 1fr;
+      }
+      .sheet-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    /* PRINT A4 - IMPRIME SOMENTE A FICHA LIMPA */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      nav, .hero, #cenario, #sistema, #classes, #pactos, #ultima-peia, #poderes,
+      .builder-panel, .sheet-actions, .dice-fab, .dice-drawer, footer, .section-header {
+        display: none !important;
+      }
+      #construtor {
+        padding: 0 !important;
+        border: none !important;
+      }
+      .container {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .builder-layout {
+        display: block !important;
+      }
+      .sheet-wrapper {
+        box-shadow: none !important;
+        border: 2px solid #000 !important;
+        background: #fff !important;
+        padding: 0.7rem !important;
+        page-break-inside: avoid;
+      }
+      .sheet-box-title {
+        background: #2b1d12 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .sheet-attr-cell, .sheet-stamp {
+        background: #f2ebe0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <span>🌵 A Butija de Lampião</span>
+        <span class="brand-badge">Sertão Alquímico</span>
+      </a>
+      <div class="nav-links">
+        <a href="#cenario">Cenário</a>
+        <a href="#sistema">Sistema</a>
+        <a href="#classes">Classes</a>
+        <a href="#pactos">Pactos</a>
+        <a href="#ultima-peia">Última Peia</a>
+        <a href="#poderes">Poderes (37)</a>
+        <a href="#construtor">Criar Ficha</a>
+      </div>
+      <a href="#construtor" class="btn btn-primary btn-sm">Forjar Personagem</a>
+    </div>
+  </nav>
+
+  <!-- HERO COM CAPA -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">D&amp;D + Chamado de Cthulhu • Raça Única: Humana</div>
+        <h1 class="font-rye">A Butija de Lampião</h1>
+        <div class="hero-subtitle">A Sombra dos 100 Anos</div>
+        <p class="hero-lead">
+          Passou-se um século desde a Grota de Angicos, mas Virgulino não morreu. Cercado por boticários hereges e bruxos da Jurema, tornou-se um rei amaldiçoado de carne ressecada, enxofre e mercúrio. Apenas uma <strong>Peixeira Sagrada</strong> pode atravessar seu coração alquímico.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-pill">
+            <strong>20 PTS</strong>
+            <span>4 Atributos (1 a 8)</span>
+          </div>
+          <div class="stat-pill">
+            <strong>4 Classes</strong>
+            <span>Do Sertão Brabo</span>
+          </div>
+          <div class="stat-pill">
+            <strong>10 Pactos</strong>
+            <span>+ Opção Cético</span>
+          </div>
+          <div class="stat-pill">
+            <strong>37 Poderes</strong>
+            <span>6 Elementos + Aço</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#construtor" class="btn btn-primary">🔪 Construir Meu Personagem</a>
+          <a href="#sistema" class="btn btn-secondary">📜 Ler Regras Completas</a>
+        </div>
+      </div>
+
+      <!-- QUADRO DA CAPA OFICIAL -->
+      <div class="cover-frame">
+        <div class="cover-img-wrap" id="coverDropzone">
+          <img
+            id="coverImg"
+            src="https://scontent.fqcp1-1.fna.fbcdn.net/v/t39.30808-6/912907853_4695224490710726_8251900781069002605_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1143&ctp=s2048x1143&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_ohc=rYUSgDRDbh4Q7kNvwGhMQZh&_nc_oc=AdppGKTJnIc0mIfoHJxvG2TL6srqOIAY9fCqljeGrhz0cBq9B6od769CH4daW0BIj7FV-KSZ7O3IPyA67hzTcXCI&_nc_zt=23&_nc_ht=scontent.fqcp1-1.fna&_nc_gid=YlgAJjI1XQu9fbXN4rACxA&_nc_ss=7b2a8&oh=00_AQQK5QiDLUf8uOxcYVhIWCIzOLfNxP2m-ehAP3A0A-EqFA&oe=6B0181B6"
+            referrerpolicy="no-referrer"
+            alt="Capa oficial de A Butija de Lampião — A Sombra dos 100 Anos"
+          />
+          <div id="coverFallback" class="cover-fallback">
+            <div style="font-size:2.3rem;">🖼️</div>
+            <h3 class="font-cinzel" style="color:var(--gold-soft);">Capa Oficial do RPG</h3>
+            <p style="font-size:0.84rem; color:var(--text-muted); max-width:34ch;">
+              Não foi possível carregar a capa online. Salve como <code style="color:var(--gold-soft);">capa.png</code> na mesma pasta ou selecione abaixo:
+            </p>
+            <label class="btn btn-primary btn-sm" style="cursor:pointer;">
+              📁 Carregar Capa do Dispositivo
+              <input type="file" id="coverInput" accept="image/*" style="display:none;" />
+            </label>
+          </div>
+        </div>
+        <div class="cover-caption">
+          <span>Capa Oficial • O Cangaço &amp; A Butija de Lampião</span>
+          <label style="cursor:pointer; color:var(--gold-soft); font-weight:600;">
+            Trocar imagem
+            <input type="file" id="coverInputAlt" accept="image/*" style="display:none;" />
+          </label>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CENÁRIO -->
+  <section id="cenario">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Introdução &amp; Lore</span>
+        <h2>O Cenário: A Sombra dos 100 Anos</h2>
+        <p>O terror nasce de gente de carne e osso lidando com forças maiores que a própria alma.</p>
+      </div>
+
+      <div class="lore-grid">
+        <div class="lore-card">
+          <p>
+            Passou-se um século desde que a história oficial disse que Virgulino Ferreira, o Lampião, caiu na Grota de Angicos. A verdade que ninguém tem coragem de contar nas feiras é outra: nos seus últimos anos, Lampião se cercou de boticários hereges e bruxos da Jurema.
+          </p>
+          <p>
+            Por meio de um experimento alquímico profano, ele não morreu — tornou-se um ser quase imortal, um rei amaldiçoado de carne ressecada, enxofre e mercúrio.
+          </p>
+          <p>
+            Durante 100 anos, ele acumulou riquezas, relíquias sagradas e segredos proibidos numa lendária <strong>Butija</strong> enterrada nas profundezas do sertão esquecido. O problema? Nenhuma bala de fuzil ou lâmina comum consegue matar Lampião; seu corpo regenera em meio a fumaça e pólvora. Ele só pode ser destruído em definitivo se o seu coração alquímico for atravessado por uma <strong>Peixeira Sagrada</strong>.
+          </p>
+
+          <div class="lore-pillars">
+            <div class="pillar">
+              <strong>🗺️ A Caçada ao Mapa da Butija</strong>
+              <span style="font-size:0.9rem; color:var(--text-muted);">O tesouro profano exige pistas espalhadas pelo sertão (Parte 1, Parte 2 e Parte 3 na ficha de personagem).</span>
+            </div>
+            <div class="pillar">
+              <strong>🔪 A Peixeira Sagrada</strong>
+              <span style="font-size:0.9rem; color:var(--text-muted);">Para encerrar a imortalidade do Rei do Cangaço, é preciso xxxxxxxxxxx?: <em>xxxxx</em>, <em>xxxxx</em> e <em>xxxxx / xxxxx</em>.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-box">
+          <div class="scene-img-wrap" id="sceneDropzone">
+            <img
+              id="sceneImg"
+              src="https://scontent.fqcp1-1.fna.fbcdn.net/v/t39.30808-6/910605460_4695226190710556_8896640418380241690_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1143&ctp=s2048x1143&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_ohc=S0BdReHZydgQ7kNvwG_8ERQ&_nc_oc=AdqmKBqPCgDq9Cu4f9zQDfg1wcSKHWnKTuwjBUsDvqFnWDTMLrn8W5FYJCPgfTaKKAJXFwl7NAsinEHhYS0OrHrW&_nc_zt=23&_nc_ht=scontent.fqcp1-1.fna&_nc_gid=VXMB8o7OkhCTLOX7eBLekg&_nc_ss=7b2a8&oh=00_AQTnnt3HLYudMCmE1gTyfDR5lAzIPFfbdRItT6o7J8j57g&oe=6B019857"
+              referrerpolicy="no-referrer"
+              alt="Vilarejo assombrado do Sertão Alquímico"
+            />
+            <div id="sceneFallback" class="cover-fallback" style="border:none; padding:1.5rem;">
+              <div style="font-size:2rem;">🏜️</div>
+              <strong style="color:var(--gold-soft); font-family:'Cinzel', serif;">Vilarejo do Sertão Esquecido</strong>
+              <p style="font-size:0.8rem; color:var(--text-muted);">
+                Opcional: salve a imagem do vilarejo como <code style="color:var(--gold-soft);">cenario.png</code> ou carregue-a aqui.
+              </p>
+              <label class="btn btn-secondary btn-sm" style="cursor:pointer;">
+                Carregar Imagem do Cenário
+                <input type="file" id="sceneInput" accept="image/*" style="display:none;" />
+              </label>
+            </div>
+          </div>
+          <div class="scene-info">
+            <h3>Raça Única: Humana</h3>
+            <p>Não há elfos ou orcs aqui. Todo jogador interpreta um sertanejo, estudioso, rastejador ou mandingueiro de carne e osso enfrentando mortos-vivos, aberrações da caatinga e os capangas alquímicos de Lampião.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGEM DO RITUAL PROFANO -->
+      <div class="ritual-feature">
+        <div class="ritual-img-wrap" id="ritualDropzone">
+          <img
+            id="ritualImg"
+            src="https://scontent.fqcp1-1.fna.fbcdn.net/v/t39.30808-6/912661047_4695224687377373_3295742880385809818_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1143&ctp=s2048x1143&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_ohc=WGJ_oJWiiGsQ7kNvwEpA_a8&_nc_oc=Adqs-qkH5WOCwnGZpX4_PSGldFqLKnHLfaqnJ1rw8OTQiatuvfVheF42A2-NkoXO0k1K3muwlUfMuw68VmXEOOEd&_nc_zt=23&_nc_ht=scontent.fqcp1-1.fna&_nc_gid=C4gVdKPlHPsbWLnmoSq1KA&_nc_ss=7b2a8&oh=00_AQTDLE_u_Y53gyPcNWSaPjXeyp9rXkllvIbJflZJIOf7zQ&oe=6B0181D9"
+            referrerpolicy="no-referrer"
+            alt="O Ritual Profano: boticários hereges e bruxas da Jurema ressuscitando Lampião com enxofre e mercúrio"
+          />
+          <div id="ritualFallback" class="cover-fallback" style="border:none; padding:1.5rem;">
+            <div style="font-size:2rem;">⚗️</div>
+            <strong style="color:var(--gold-soft); font-family:'Cinzel', serif;">O Ritual Profano</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">
+              Opcional: salve a imagem do ritual como <code style="color:var(--gold-soft);">ritual.png</code> ou carregue-a aqui.
+            </p>
+            <label class="btn btn-secondary btn-sm" style="cursor:pointer;">
+              Carregar Imagem do Ritual
+              <input type="file" id="ritualInput" accept="image/*" style="display:none;" />
+            </label>
+          </div>
+        </div>
+        <div class="ritual-info">
+          <span class="badge badge-rust" style="width:fit-content;">⚗️ O Experimento Alquímico Profano</span>
+          <h3>Carne Ressecada, Enxofre e Mercúrio</h3>
+          <p>
+            Nas profundezas de uma gruta esquecida, boticários hereges e bruxas da Jurema ergueram Virgulino além da morte. Cercado por vapores de enxofre e mercúrio derramado sobre o altar de pedra, Lampião retornou como um rei imortal — e apenas a Peixeira Sagrada pode pôr fim à sua sombra centenária.
+          </p>
+          <div style="margin-top:0.35rem; font-size:0.78rem; color:var(--text-muted);">
+            <label style="cursor:pointer; color:var(--gold-soft); font-weight:600;">
+              Trocar imagem do ritual
+              <input type="file" id="ritualInputAlt" accept="image/*" style="display:none;" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 1: SISTEMA BASE -->
+  <section id="sistema">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Capítulo 1</span>
+        <h2>Sistema Base (D&amp;D + Chamado de Cthulhu)</h2>
+        <p>Tudo o que você precisa para distribuir seus pontos, calcular status derivados e rolar os dados na mesa.</p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 1.5rem;">
+        <div class="card">
+          <h3>1. Os 4 Atributos (20 Pontos)</h3>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.9rem;">
+            Na criação, distribua <strong>20 pontos</strong> entre os 4 atributos (<strong>mínimo 1, máximo 8</strong> na criação). Quem escolher ser <em>Cético / Sem Pacto</em> ganha <strong>+1 ponto extra (21 pts)</strong>.
+          </p>
+          <div class="formula-box">
+            <strong>💪 Força (FOR) — Luta / Dano</strong>
+            <span style="font-size:0.86rem; color:var(--text-muted);">Combate corpo a corpo, dano físico, atletismo, quebrar barreiras, resistir a agarrões e disputas de aço na Última Peia.</span>
+          </div>
+          <div class="formula-box">
+            <strong>🛡️ Defesa (DEF) — CA / Vigor</strong>
+            <span style="font-size:0.86rem; color:var(--text-muted);">Resistência física, esquiva, vigor contra venenos/doenças e cálculo de Vida e Armadura.</span>
+          </div>
+          <div class="formula-box">
+            <strong>🧠 Inteligência (INT) — Alquimia / Magia</strong>
+            <span style="font-size:0.86rem; color:var(--text-muted);">Investigação (pistas de Cthulhu), Alquimia, percepção tática, mira com armas complexas/arcos, conjuração elemental e resistência mental.</span>
+          </div>
+          <div class="formula-box" style="margin-bottom:0;">
+            <strong>🍀 Sorte (SOR) — Destino / Crítico</strong>
+            <span style="font-size:0.86rem; color:var(--text-muted);">Críticos, encontros, achar a Butija, esquivas milagrosas e reserva de Pontos de Sorte.</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>2. Status Derivados</h3>
+          <div class="formula-box">
+            <strong>❤️ Pontos de Vida (PV) — <span class="formula-code">12 + (DEF × 2) + Bônus de Classe</span></strong>
+            <span style="font-size:0.84rem; color:var(--text-muted);">
+              <strong>Ferimento Grave (-50% PV):</strong> Se sofrer metade do seu PV máximo em um único golpe, faz teste de <strong>DEF CD 14</strong> ou sofre um Ferimento Grave com penalidade até ser tratado.
+            </span>
+          </div>
+          <div class="formula-box">
+            <strong>🦺 Classe de Armadura (CA) — <span class="formula-code">10 + DEF + Equipamento</span></strong>
+            <span style="font-size:0.84rem; color:var(--text-muted);">Ex.: Gibão de Couro concede +2 CA. Alguns Pactos (como São Jorge) somam bônus permanentes.</span>
+          </div>
+          <div class="formula-box">
+            <strong>⚡ Pontos de Mandinga / Fôlego (PM) — <span class="formula-code">8 + INT + Bônus de Classe</span></strong>
+            <span style="font-size:0.84rem; color:var(--text-muted);">Usados para ativar habilidades elementais e poderes sobrenaturais.</span>
+          </div>
+          <div class="formula-box">
+            <strong>👁️ Juízo (Sanidade - Cthulhu) — <span class="formula-code">10 + INT + SOR (+ Classe)</span></strong>
+            <span style="font-size:0.84rem; color:var(--text-muted);">Mede sua lucidez diante de mortos-vivos, aberrações da caatinga e horrores alquímicos. Se chegar a <strong>0</strong>, o personagem enlouquece/entra em surto.</span>
+          </div>
+          <div class="formula-box" style="margin-bottom:0;">
+            <strong>🎲 Reserva de Sorte — <span class="formula-code">SOR × 2</span></strong>
+            <span style="font-size:0.84rem; color:var(--text-muted);">Pontos para gastar alterando o resultado de rolagens (1 ponto = +1 ou -1).</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>3. Como Rolar os Dados &amp; Mecânicas de Cthulhu</h3>
+        <div class="grid-2" style="margin-top:0.8rem;">
+          <div>
+            <p style="font-size:0.9rem; margin-bottom:0.6rem;">
+              <strong>Teste Padrão:</strong> <span class="formula-code">1d20 + Atributo (+ bônus de classe/perícia)</span> contra a Dificuldade (CD):
+            </p>
+            <table class="cd-table">
+              <thead>
+                <tr><th>Dificuldade</th><th>CD</th><th>Exemplo</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Fácil</td><td><strong>10</strong></td><td>Pular cerca baixa, pista evidente</td></tr>
+                <tr><td>Média</td><td><strong>14</strong></td><td>Equilíbrio na Última Peia, resistir a venenos</td></tr>
+                <tr><td>Difícil</td><td><strong>18</strong></td><td>Decifrar manuscrito alquímico, arrombar cofre</td></tr>
+                <tr><td>Extrema</td><td><strong>22</strong></td><td>Localizar a Butija sob cerco, resistir ao horror puro</td></tr>
+              </tbody>
+            </table>
+            <div style="margin-top:0.9rem; font-size:0.88rem; color:#e5d9c7;">
+              <p style="margin-bottom:0.4rem;"><strong>⚔️ Ataques:</strong> Corpo a corpo usa <span class="formula-code">1d20 + FOR</span>; Distância/Tática/Arco usa <span class="formula-code">1d20 + INT</span> (ou FOR para arremesso); Habilidades Mágicas usam o atributo indicado. Acerta se igualar ou superar a CA do alvo.</p>
+              <p><strong>💥 Crítico (20 Natural) e Desastre (1 Natural):</strong> 20 dobra os dados de dano/efeito. 1 causa falha catastrófica (arma emperra, alambique explode, magia atinge um aliado).</p>
+            </div>
+          </div>
+
+          <div style="display:grid; gap:0.8rem;">
+            <div class="formula-box" style="border-color:rgba(217,155,56,0.5);">
+              <strong>🪙 Gastar Sorte (Mecânica Cthulhu)</strong>
+              <p style="font-size:0.87rem; color:var(--text-muted); margin-top:0.3rem;">
+                Após rolar qualquer dado (seu ou de um ataque contra você), você pode queimar pontos da sua <strong>Reserva de Sorte</strong> na proporção de <strong>1 ponto = +1</strong> (ou <strong>-1 no inimigo</strong>) para mudar o destino.<br />
+                <em>Recuperação:</em> Pontos gastos só voltam ao descansar em <strong>solo sagrado</strong> ou ao cumprir um feito do seu Pacto.
+              </p>
+            </div>
+            <div class="formula-box" style="border-color:rgba(217,82,50,0.55); margin-bottom:0;">
+              <strong>🔥 Forçar a Rolagem (Mecânica Cthulhu)</strong>
+              <p style="font-size:0.87rem; color:var(--text-muted); margin-top:0.3rem;">
+                Se falhar num teste de <em>investigação, alquimia ou sobrevivência</em>, você pode pedir para rolar de novo, mas paga um custo imediato: <strong>-1d4 de Juízo</strong> ou <strong>-1d4 de PV</strong>.<br />
+                <span style="color:#ffb39f;"><strong>Atenção:</strong> Se falhar na segunda vez, o desastre é garantido e severo!</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 2: CLASSES DO SERTÃO -->
+  <section id="classes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Capítulo 2</span>
+        <h2>Classes do Sertão</h2>
+        <p>Escolha seu arquétipo de sobrevivência. Clique em uma classe para aplicá-la diretamente na sua ficha.</p>
+      </div>
+      <div class="grid-4" id="classesGrid"></div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 3: PACTOS -->
+  <section id="pactos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Capítulo 3</span>
+        <h2>Os Pactos com as Entidades</h2>
+        <p>
+          Você pode escolher <strong>1 Pacto</strong> (ou ser um <strong>Cético / Sem Pacto</strong>, ganhando <strong>+1 ponto de Atributo extra</strong> na criação). Quem faz pacto recebe um <strong>Dom Poderoso</strong>, mas deve obedecer ao <strong>Tabu</strong> — quebrá-lo faz perder o Dom e custa <strong>-1d4 de Juízo</strong> até pagar uma penitência.
+        </p>
+      </div>
+      <div class="grid-3" id="pactsGrid"></div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 4: A ÚLTIMA PEIA -->
+  <section id="ultima-peia">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Capítulo 4 • Habilidade Única (Todos Possuem)</span>
+        <h2>A Última Peia (Trocação de Pexeira)</h2>
+      </div>
+
+      <div class="peia-banner">
+        <div class="peia-quote">
+          "Quando a pólvora acaba e a bicha pega no brabo, o cangaço se resolve é no aço frio."
+        </div>
+
+        <div class="grid-3">
+          <div class="formula-box">
+            <strong>⏳ Uso</strong>
+            <span style="font-size:0.88rem; color:var(--text-muted);">Apenas <strong>1 vez por campanha/sessão inteira</strong> (por personagem).</span>
+          </div>
+          <div class="formula-box">
+            <strong>🎯 Gatilho</strong>
+            <span style="font-size:0.88rem; color:var(--text-muted);">Ativada no início de um turno contra inimigos comuns ou de elite. <strong>Chefões são imunes</strong>, salvo <strong>Crítico Natural (20)</strong> exato na rolagem de ativação para forçar o duelo.</span>
+          </div>
+          <div class="formula-box">
+            <strong>🔪 Efeito</strong>
+            <span style="font-size:0.88rem; color:var(--text-muted);">Entram em Frenesi. Armas de fogo e magias são guardadas/anuladas: todos lutam <strong>exclusivamente com a pexeira</strong> até um dos lados cair morto ou incapacitado.</span>
+          </div>
+        </div>
+
+        <h3 class="font-cinzel" style="margin-top:1.4rem; color:#ffd7b8;">Como funciona a mecânica do Duelo (O Dedo no Aço)</h3>
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span><strong>O Sangue Ferve:</strong> Todos os alvos perdem a iniciativa tradicional e o combate entra num ritmo frenético corpo a corpo.
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span><strong>Rolagem Simultânea:</strong> Jogador e Inimigo rolam <span class="formula-code">1d20 + FOR + Bônus</span> simultaneamente. (Alquimistas e Bruxos podem usar <strong>SOR</strong> no lugar de FOR para representar desespero/mandinga).
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span><strong>Vitória do Jogador:</strong> Causa dano fixo alto da pexeira (<span class="formula-code">6 + FOR</span>) — ou Crítico (<span class="formula-code">12 + 2×FOR</span>) se tirar 20 natural ou vencer por <strong>10+ de diferença</strong>!
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span><strong>Vitória do Inimigo:</strong> O herói sofre um corte profundo (<span class="formula-code">6 + FOR do inimigo</span>).
+          </div>
+          <div class="step-item">
+            <span class="step-num">5</span><strong>Empate:</strong> Choque de lâminas faiscante! Ambos fazem teste de <strong>DEF (CD 14)</strong> — quem falhar desequilibra e sofre <strong>-2</strong> na próxima rolagem do duelo.
+          </div>
+          <div class="step-item">
+            <span class="step-num">6</span><strong>Até a Morte:</strong> Continua rodada após rodada até o PV de um dos lados chegar a zero. Ninguém foge e nenhum aliado pode interferir de fora.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 5: PODERES, ELEMENTOS E HABILIDADES -->
+  <section id="poderes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Capítulo 5</span>
+        <h2>Poderes, Elementos e Habilidades</h2>
+        <p>Cada jogador escolhe até <strong>3 Habilidades na criação</strong> dentre as 30 Habilidades Elementais e as 7 Habilidades Não-Mágicas.</p>
+      </div>
+
+      <div class="grid-4" style="margin-bottom:1.5rem;">
+        <div class="card">
+          <h3>1. Limite Normal</h3>
+          <p style="font-size:0.86rem; color:var(--text-muted);">Combine no máximo <strong>2 elementos diferentes</strong> (ex.: 2 Fogo + 1 Terra; 3 Fogo; ou 2 Fauna + 1 Não-Mágica).</p>
+        </div>
+        <div class="card">
+          <h3>2. Regra do Eclético</h3>
+          <p style="font-size:0.86rem; color:var(--text-muted);">Quem quiser misturar <strong>3 elementos diferentes</strong> só pode escolher <strong>1 única magia de cada elemento</strong> (1+1+1 = 3 escolhas).</p>
+        </div>
+        <div class="card">
+          <h3>3. Raridade da Água</h3>
+          <p style="font-size:0.86rem; color:var(--text-muted);">Exige Pacto compatível (<em>Santa Águeda</em> ou <em>São José das Chuvas</em>) ou preço narrativo aprovado pelo Mestre. Longe de água custa <strong>+1 PM</strong>.</p>
+        </div>
+        <div class="card">
+          <h3>4. Canalização Marcial</h3>
+          <p style="font-size:0.86rem; color:var(--text-muted);">Guerreiros, Arqueiros e Alquimistas podem canalizar poderes através de socos, pexeiras, flechas, balas ou frascos.</p>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-tabs" id="elementFilterTabs"></div>
+        <input type="search" id="powerSearch" class="search-input" placeholder="Buscar poder, PM ou efeito..." />
+      </div>
+
+      <div class="grid-3" id="powersGrid"></div>
+    </div>
+  </section>
+
+  <!-- CONSTRUTOR DE PERSONAGEM & FICHA OFICIAL -->
+  <section id="construtor">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Criação Completa &amp; Mesa</span>
+        <h2>Construtor de Personagem &amp; Ficha Oficial</h2>
+        <p>Monte seu personagem seguindo todas as regras do documento. A ficha à direita calcula PV, CA, PM, Juízo, Sorte e Última Peia em tempo real — pronta para usar na mesa ou imprimir em A4.</p>
+      </div>
+
+      <div class="builder-layout">
+        <!-- PAINEL DE CONTROLES -->
+        <div class="builder-panel">
+
+          <div class="builder-group">
+            <h3>
+              <span>1. Identidade &amp; Campanha</span>
+              <div style="display:flex; gap:0.4rem;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnRandomChar">🎲 Aleatório</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnResetChar">↺ Zerar</button>
+              </div>
+            </h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="inName">Nome do Personagem</label>
+                <input type="text" id="inName" placeholder="Ex.: Zé Cascavel" />
+              </div>
+              <div class="field">
+                <label for="inPlayer">Jogador</label>
+                <input type="text" id="inPlayer" placeholder="Seu nome" />
+              </div>
+              <div class="field">
+                <label for="inLevel">Nível</label>
+                <input type="number" id="inLevel" min="1" max="20" value="1" />
+              </div>
+              <div class="field">
+                <label>Raça (Fixa no Cenário)</label>
+                <input type="text" value="Humana" readonly style="opacity:0.75;" />
+              </div>
+            </div>
+          </div>
+
+          <div class="builder-group">
+            <h3>2. Classe do Sertão &amp; Pacto</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="inClass">Classe</label>
+                <select id="inClass"></select>
+              </div>
+              <div class="field">
+                <label for="inPact">Entidade / Pacto</label>
+                <select id="inPact"></select>
+              </div>
+            </div>
+            <div class="field" style="margin-top:0.65rem;">
+              <label for="inArmorBonus">Bônus de Armadura / Equipamento na CA (Ex.: Gibão de Couro = +2)</label>
+              <input type="number" id="inArmorBonus" min="0" max="15" value="2" />
+            </div>
+            <div id="pactSummaryBox" class="alert-box alert-ok" style="margin-top:0.75rem;"></div>
+          </div>
+
+          <div class="builder-group">
+            <h3>
+              <span>3. Atributos (<span id="pointsUsedLabel">20</span>/<span id="pointsMaxLabel">20</span> pts)</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnSuggestStats">✨ Sugestão da Classe</button>
+            </h3>
+            <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.65rem;">
+              Mínimo <strong>1</strong> e máximo <strong>8</strong> na criação. Cético ganha +1 ponto (total 21).
+            </p>
+            <div class="attr-stepper-grid">
+              <div class="attr-control">
+                <div>
+                  <strong>FORÇA (FOR)</strong>
+                  <small>Luta / Dano / Peia</small>
+                </div>
+                <div class="stepper">
+                  <button type="button" data-attr="for" data-delta="-1">−</button>
+                  <span id="val-for">5</span>
+                  <button type="button" data-attr="for" data-delta="1">+</button>
+                </div>
+              </div>
+              <div class="attr-control">
+                <div>
+                  <strong>DEFESA (DEF)</strong>
+                  <small>PV / CA / Vigor</small>
+                </div>
+                <div class="stepper">
+                  <button type="button" data-attr="def" data-delta="-1">−</button>
+                  <span id="val-def">5</span>
+                  <button type="button" data-attr="def" data-delta="1">+</button>
+                </div>
+              </div>
+              <div class="attr-control">
+                <div>
+                  <strong>INTELIG. (INT)</strong>
+                  <small>Alquimia / Magia / Mira</small>
+                </div>
+                <div class="stepper">
+                  <button type="button" data-attr="int" data-delta="-1">−</button>
+                  <span id="val-int">5</span>
+                  <button type="button" data-attr="int" data-delta="1">+</button>
+                </div>
+              </div>
+              <div class="attr-control">
+                <div>
+                  <strong>SORTE (SOR)</strong>
+                  <small>Reserva / Crítico</small>
+                </div>
+                <div class="stepper">
+                  <button type="button" data-attr="sor" data-delta="-1">−</button>
+                  <span id="val-sor">5</span>
+                  <button type="button" data-attr="sor" data-delta="1">+</button>
+                </div>
+              </div>
+            </div>
+            <div id="attrAlert" class="alert-box alert-ok">Distribuição válida!</div>
+          </div>
+
+          <div class="builder-group">
+            <h3>
+              <span>4. Poderes Escolhidos (<span id="powerCountLabel">0</span>/3)</span>
+              <a href="#poderes" class="btn btn-secondary btn-sm">Ir ao Grimório ↑</a>
+            </h3>
+            <div class="field" style="margin-bottom:0.55rem;">
+              <label for="quickPowerSelect">Adicionar Poder ou Habilidade Não-Mágica rapidamente:</label>
+              <div style="display:flex; gap:0.45rem;">
+                <select id="quickPowerSelect"></select>
+                <button type="button" class="btn btn-primary btn-sm" id="btnAddQuickPower">+ Adicionar</button>
+              </div>
+            </div>
+            <label style="display:inline-flex; align-items:center; gap:0.45rem; font-size:0.8rem; color:var(--text-muted); cursor:pointer;">
+              <input type="checkbox" id="chkMasterWater" />
+              Permitir Água por aprovação/preço narrativo do Mestre
+            </label>
+
+            <div class="selected-powers-list" id="selectedPowersList"></div>
+            <div id="powerRuleAlert" class="alert-box alert-ok">Escolha até 3 habilidades (máx. 2 elementos, ou 3 elementos sendo 1 magia de cada).</div>
+          </div>
+
+          <div class="builder-group">
+            <h3>5. Dinheiro, Cantil &amp; Notas de Mesa</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="inMoney">Ouro / Réis</label>
+                <input type="text" id="inMoney" placeholder="Ex.: 120 Réis" />
+              </div>
+              <div class="field">
+                <label for="inWater">Água (Cantil)</label>
+                <input type="text" id="inWater" placeholder="Ex.: Cheio (3 doses)" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FICHA OFICIAL ESPELHO DO PDF -->
+        <div>
+          <div class="sheet-wrapper" id="printableSheet">
+            <div class="sheet-header">
+              <div class="sheet-stamp">SERTÃO<br />ALQUÍMICO<br />100 ANOS</div>
+              <div class="sheet-title">
+                <h3>O CANGAÇO &amp; A BUTIJA DE LAMPIÃO</h3>
+                <p>Ficha de Personagem • D&amp;D + Chamado de Cthulhu</p>
+              </div>
+              <div class="sheet-stamp">RAÇA:<br />HUMANA</div>
+            </div>
+
+            <div class="sheet-meta-lines">
+              <div><strong>Nome</strong><span id="sh-name">—</span></div>
+              <div><strong>Classe</strong><span id="sh-class">—</span></div>
+              <div><strong>Jogador</strong><span id="sh-player">—</span></div>
+              <div><strong>Nível</strong><span id="sh-level">1</span></div>
+              <div style="grid-column: span 2;">
+                <strong>Entidade / Pacto</strong>
+                <span id="sh-pact">—</span>
+                <div class="sheet-check-row" style="margin:0.15rem 0 0;">
+                  <label><input type="radio" name="pactStatus" value="em_dia" checked /> Em Dia</label>
+                  <label><input type="radio" name="pactStatus" value="quebrado" /> Quebrado</label>
+                </div>
+              </div>
+              <div><strong>Dom</strong><span id="sh-dom" style="font-size:0.68rem; font-weight:600;">—</span></div>
+              <div><strong>Tabu</strong><span id="sh-tabu" style="font-size:0.68rem; font-weight:600;">—</span></div>
+            </div>
+
+            <div class="sheet-two-col">
+              <!-- COLUNA ESQUERDA: ATRIBUTOS E STATUS -->
+              <div class="sheet-box">
+                <div class="sheet-box-title">
+                  <span>Atributos (20 Pts)</span>
+                  <span style="font-size:0.65rem;">Mín: 1 | Máx criação: 8</span>
+                </div>
+                <div class="sheet-box-body">
+                  <div class="sheet-attrs">
+                    <div class="sheet-attr-cell">
+                      <label>FORÇA</label>
+                      <strong id="sh-for">5</strong>
+                      <span>Luta / Dano</span>
+                    </div>
+                    <div class="sheet-attr-cell">
+                      <label>DEFESA</label>
+                      <strong id="sh-def">5</strong>
+                      <span>CA / Vigor</span>
+                    </div>
+                    <div class="sheet-attr-cell">
+                      <label>INTELIG.</label>
+                      <strong id="sh-int">5</strong>
+                      <span>Alquimia/Magia</span>
+                    </div>
+                    <div class="sheet-attr-cell">
+                      <label>SORTE</label>
+                      <strong id="sh-sor">5</strong>
+                      <span>Destino/Crítico</span>
+                    </div>
+                  </div>
+
+                  <div class="sheet-derived-grid">
+                    <div class="derived-card">
+                      <div class="derived-card-top">
+                        <span>VIDA (PV)</span>
+                        <span>12+DEF×2+CL</span>
+                      </div>
+                      <div class="derived-values">
+                        <input type="number" id="sh-pv-cur" title="PV Atual" /> / <span id="sh-pv-max">30</span>
+                      </div>
+                      <label style="display:flex; align-items:center; gap:0.25rem; font-size:0.66rem; margin-top:0.2rem; cursor:pointer;">
+                        <input type="checkbox" id="chk-grave" /> Ferimento Grave (-50% PV)
+                      </label>
+                    </div>
+
+                    <div class="derived-card">
+                      <div class="derived-card-top">
+                        <span>ARMADURA (CA)</span>
+                        <span>10+DEF+EQUIP</span>
+                      </div>
+                      <div class="derived-values">
+                        <span>TOTAL: <strong id="sh-ca" style="font-size:1.05rem;">17</strong></span>
+                      </div>
+                      <div style="font-size:0.65rem; color:#5e422b; margin-top:0.15rem;">
+                        Inic: <strong id="sh-inic">+0</strong> • Equip: +<span id="sh-equip-ca">2</span>
+                      </div>
+                    </div>
+
+                    <div class="derived-card">
+                      <div class="derived-card-top">
+                        <span>MANDINGA (PM)</span>
+                        <span>8+INT+CL</span>
+                      </div>
+                      <div class="derived-values">
+                        <input type="number" id="sh-pm-cur" title="PM Atual" /> / <span id="sh-pm-max">13</span>
+                      </div>
+                    </div>
+
+                    <div class="derived-card">
+                      <div class="derived-card-top">
+                        <span>JUÍZO (SANIDADE)</span>
+                        <span>10+INT+SOR</span>
+                      </div>
+                      <div class="derived-values">
+                        <input type="number" id="sh-san-cur" title="Juízo Atual" /> / <span id="sh-san-max">20</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="derived-card">
+                    <div class="derived-card-top">
+                      <span>RESERVA DE SORTE (<span id="sh-luck-rem">10</span>/<span id="sh-luck-max">10</span>)</span>
+                      <span>MÁX = SOR × 2 (1 PT = +1/-1)</span>
+                    </div>
+                    <div class="luck-boxes" id="sh-luck-boxes"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- COLUNA DIREITA: ÚLTIMA PEIA + CAÇADA À BUTIJA -->
+              <div style="display:grid; gap:0.65rem;">
+                <div class="sheet-box">
+                  <div class="sheet-box-title rust-bar">
+                    <span>🔪 A Última Peia (Trocação)</span>
+                    <label style="font-size:0.66rem; display:flex; align-items:center; gap:0.25rem; cursor:pointer; text-transform:none;">
+                      <input type="checkbox" id="chk-peia-used" /> Já Usada (1x/Sessão)
+                    </label>
+                  </div>
+                  <div class="sheet-box-body">
+                    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.35rem; background:#f2e6d0; padding:0.35rem; border-radius:4px; border:1px solid #b59774; margin-bottom:0.4rem; text-align:center;">
+                      <div><strong style="font-size:0.63rem; display:block;">DUELO</strong><span id="sh-peia-duel">1d20+5</span></div>
+                      <div><strong style="font-size:0.63rem; display:block;">DANO (6+FOR)</strong><span id="sh-peia-dmg">11</span></div>
+                      <div><strong style="font-size:0.63rem; display:block;">CRÍT (2X)</strong><span id="sh-peia-crit">22</span></div>
+                    </div>
+                    <ul style="padding-left:1rem; font-size:0.69rem; line-height:1.38; color:#3d2718;">
+                      <li><strong>Regra:</strong> Anula balas e magias. Todos lutam só na pexeira até a morte (sem ajuda externa).</li>
+                      <li><strong>Chefão:</strong> Imune, salvo <strong>20 Natural</strong> na ativação.</li>
+                      <li><strong>Disputa:</strong> 1d20 + FOR/SOR + Bônus simultâneo. Empate = Teste DEF CD 14.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="sheet-box">
+                  <div class="sheet-box-title">
+                    <span>🎯 Caçada à Butija &amp; Peixeira Sagrada</span>
+                  </div>
+                  <div class="sheet-box-body">
+                    <div class="sheet-check-row" style="background:#ebd7b8; padding:0.25rem 0.45rem; border-radius:4px; border:1px solid #a17e58;">
+                      <label><input type="checkbox" id="chk-peixeira-sagrada" /> PORTANDO A PEIXEIRA SAGRADA</label>
+                    </div>
+                    <div class="sheet-check-row">
+                      <strong>Mapa da Butija:</strong>
+                      <label><input type="checkbox" id="chk-map1" /> Parte 1</label>
+                      <label><input type="checkbox" id="chk-map2" /> Parte 2</label>
+                      <label><input type="checkbox" id="chk-map3" /> Parte 3</label>
+                    </div>
+                    <div class="sheet-check-row">
+                      <strong>Forja:</strong>
+                      <label><input type="checkbox" id="chk-forja1" /> Ferro</label>
+                      <label><input type="checkbox" id="chk-forja2" /> Água Viva</label>
+                      <label><input type="checkbox" id="chk-forja3" /> Enxofre/Jurema</label>
+                    </div>
+                    <div style="margin-top:0.35rem; font-size:0.71rem;">
+                      <strong>Especialidades (+2/+3):</strong> <span id="sh-specs">—</span>
+                    </div>
+                    <div style="margin-top:0.25rem; font-size:0.71rem;">
+                      <strong>Bônus de Classe:</strong> <span id="sh-class-bonus">—</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PODERES ESCOLHIDOS -->
+            <div class="sheet-box" style="margin-bottom:0.85rem;">
+              <div class="sheet-box-title">
+                <span>⚡ Poderes Escolhidos (3 Escolhas)</span>
+                <span style="font-size:0.63rem; text-transform:none;">Máx 2 Elementos (ou 3, 1 de cada) • Água exige Pacto/aprovação</span>
+              </div>
+              <div class="sheet-box-body">
+                <div class="sheet-powers-grid" id="sh-powers-slots"></div>
+              </div>
+            </div>
+
+            <!-- ARMAS & ALFORJE -->
+            <div class="sheet-two-col">
+              <div class="sheet-box">
+                <div class="sheet-box-title"><span>🔫 Armas &amp; Arsenal</span></div>
+                <div class="sheet-box-body">
+                  <table class="sheet-table">
+                    <thead>
+                      <tr><th>Arma</th><th>ATQ</th><th>Dano</th><th>Mun. / Notas</th></tr>
+                    </thead>
+                    <tbody id="sh-weapons-body"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="sheet-box">
+                <div class="sheet-box-title"><span>🎒 Alforje, Alquimia &amp; Dinheiro</span></div>
+                <div class="sheet-box-body">
+                  <div style="display:flex; justify-content:space-between; font-size:0.72rem; margin-bottom:0.35rem; gap:0.5rem;">
+                    <span><strong>Ouro / Réis:</strong> <span id="sh-money">—</span></span>
+                    <span><strong>Água (Cantil):</strong> <span id="sh-water">—</span></span>
+                  </div>
+                  <textarea class="sheet-textarea" id="inGear" rows="4" placeholder="Equipamentos, bombas, ervas, patuás..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- PISTAS, CONTATOS & TRAUMAS -->
+            <div class="sheet-box">
+              <div class="sheet-box-title"><span>🗝️ Pistas de Investigação, Contatos &amp; Traumas</span></div>
+              <div class="sheet-box-body">
+                <textarea class="sheet-textarea" id="inNotes" rows="3" placeholder="Anotações da investigação de Cthulhu, locais do mapa, traumas de Juízo e aliados no sertão..."></textarea>
+              </div>
+            </div>
+
+            <div class="sheet-footer-note">
+              <span><strong>Mecânica Cthulhu:</strong> Falhou em teste? Pode <em>Forçar Rolagem</em> pagando -1d4 Juízo ou PV (falhar de novo = Desastre).</span>
+              <span>Sistema Cangaço Alquímico • Ficha A4</span>
+            </div>
+          </div>
+
+          <div class="sheet-actions">
+            <button type="button" class="btn btn-primary" onclick="window.print()">🖨️ Imprimir / Salvar Ficha em PDF (A4)</button>
+            <button type="button" class="btn btn-secondary" id="btnCopySummary">📋 Copiar Resumo (WhatsApp / Discord)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLADOR DE DADOS FLUTUANTE -->
+  <button type="button" class="btn btn-rust dice-fab" id="btnToggleDice">🎲 Rolar Dados</button>
+  <div class="dice-drawer" id="diceDrawer">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.7rem;">
+      <strong class="font-cinzel" style="color:var(--gold-soft);">🎲 Rolador do Sertão</strong>
+      <button type="button" id="btnCloseDice" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:1.1rem;">✕</button>
+    </div>
+    <div class="form-grid" style="margin-bottom:0.65rem;">
+      <div class="field">
+        <label>Atributo da Ficha</label>
+        <select id="diceAttr">
+          <option value="for">FOR (Corpo a Corpo)</option>
+          <option value="def">DEF (Vigor / Esquiva)</option>
+          <option value="int">INT (Alquimia / Mira)</option>
+          <option value="sor">SOR (Destino)</option>
+          <option value="none">Sem Atributo (+0)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Bônus Extra / CD</label>
+        <div style="display:flex; gap:0.35rem;">
+          <input type="number" id="diceBonus" value="0" title="Bônus adicional" />
+          <select id="diceCD" title="Dificuldade">
+            <option value="0">Sem CD</option>
+            <option value="10">CD 10 (Fácil)</option>
+            <option value="14" selected>CD 14 (Média)</option>
+            <option value="18">CD 18 (Difícil)</option>
+            <option value="22">CD 22 (Extrema)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:0.45rem;">
+      <button type="button" class="btn btn-primary btn-sm" id="btnRollD20">Rolar 1d20</button>
+      <button type="button" class="btn btn-rust btn-sm" id="btnForceRoll">🔥 Forçar (-1d4)</button>
+      <button type="button" class="btn btn-secondary btn-sm" id="btnRollPeia">🔪 Última Peia</button>
+    </div>
+    <div class="dice-log" id="diceLog">
+      Pronto para rolar. Seus atributos atuais da ficha são aplicados automaticamente!
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p><strong>A Butija de Lampião — A Sombra dos 100 Anos</strong> • Sistema Cangaço Alquímico (D&amp;D + Chamado de Cthulhu)</p>
+      <p style="font-size:0.78rem; margin-top:0.3rem;">Os dados da sua ficha ficam salvos automaticamente neste navegador.</p>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // DADOS COMPLETOS DO DOCUMENTO OFICIAL
+    // =========================================================================
+    const CLASSES = {
+      cangaceiro: {
+        id: 'cangaceiro',
+        name: 'Cangaceiro (Guerreiro)',
+        subtitle: 'Mestre da violência brutal, chapéu de couro e lâmina na cinta.',
+        pvBonus: 8,
+        pmBonus: 0,
+        juizoBonus: 0,
+        defaultArmorCA: 2,
+        specialties: 'Ataques corpo a corpo (+2), Armas de fogo curtas / espingardas (+2)',
+        classBonusText: '+8 PV; +2 em ataques corpo a corpo e armas de fogo curtas/espingardas; Estilo Elemental (canaliza elementos na própria arma e corpo).',
+        bullets: [
+          '+8 PV e +2 em ataques corpo a corpo e armas de fogo curtas/espingardas.',
+          'Começa com Gibão de Couro (+2 CA), Pexeira e Garrucha/Rifle curto.',
+          'Estilo Elemental: Canaliza elementos na própria arma e no corpo para multiplicar força, velocidade e resistência.'
+        ],
+        suggestedStats: { for: 7, def: 6, int: 3, sor: 4 },
+        startingWeapons: [
+          { arma: 'Pexeira', atq: '1d20+FOR+2', dano: '1d6+FOR', mun: 'Aço frio (+2 classe)' },
+          { arma: 'Garrucha / Rifle Curto', atq: '1d20+INT+2', dano: '1d8 / 1d10', mun: 'Pólvora/Balas (+2)' },
+          { arma: '', atq: '', dano: '', mun: '' }
+        ],
+        startingGear: 'Gibão de Couro (+2 CA), Chapéu de Couro, Pexeira, Garrucha / Rifle curto.'
+      },
+      alquimista: {
+        id: 'alquimista',
+        name: 'Alquimista (Boticário / Inventor)',
+        subtitle: 'Cientista herético de óculos de latão, pólvora e alambique portátil.',
+        pvBonus: 2,
+        pmBonus: 3,
+        juizoBonus: 0,
+        defaultArmorCA: 0,
+        specialties: 'Ciência (+2), Veneno (+2), Pólvora (+2), Identificação (+2)',
+        classBonusText: '+2 PV, +3 PM; +2 em Ciência, Veneno, Pólvora e Identificação; Reduz pela metade o tempo/custo para sintetizar bombas.',
+        bullets: [
+          '+2 PV, +3 PM e +2 em testes de Ciência, Veneno, Pólvora e Identificação.',
+          'Especial: Reduz pela metade o tempo e o custo para sintetizar bombas.',
+          'Pode usar SOR no lugar de FOR na Última Peia para golpes de desespero/mandinga.'
+        ],
+        suggestedStats: { for: 2, def: 5, int: 8, sor: 5 },
+        startingWeapons: [
+          { arma: 'Pexeira de Boticário', atq: '1d20+FOR', dano: '1d6+FOR', mun: 'Usa SOR na Peia se quiser' },
+          { arma: 'Bombas & Frascos', atq: '1d20+INT', dano: '2d6', mun: 'Metade tempo/custo' },
+          { arma: '', atq: '', dano: '', mun: '' }
+        ],
+        startingGear: 'Óculos de latão, Alambique portátil, Pólvora, Frascos e Reagentes.'
+      },
+      bruxo: {
+        id: 'bruxo',
+        name: 'Bruxo (Mandingueiro / Feiticeiro)',
+        subtitle: 'Guardião das rezas fortes, garrafadas místicas e segredos da Jurema.',
+        pvBonus: 0,
+        pmBonus: 6,
+        juizoBonus: 3,
+        defaultArmorCA: 0,
+        specialties: 'Misticismo (+2), Rituais (+2), Percepção Sobrenatural (+2)',
+        classBonusText: '+6 PM, +3 Juízo; +2 em Misticismo, Rituais e Percepção Sobrenatural; Estilo Elemental (-1 PM em magias de 3+ PM, mín. 1).',
+        bullets: [
+          '+0 PV, +6 PM, +3 Juízo e +2 em Misticismo, Rituais e Percepção Sobrenatural.',
+          'Estilo Elemental: Canaliza magias a média/longa distância com mais eficiência (reduz em -1 o custo de PM de qualquer magia que custe 3 ou mais, mínimo 1).',
+          'Pode usar SOR no lugar de FOR na Última Peia para golpes de mandinga.'
+        ],
+        suggestedStats: { for: 2, def: 4, int: 8, sor: 6 },
+        startingWeapons: [
+          { arma: 'Pexeira Ritualística', atq: '1d20+FOR', dano: '1d6+FOR', mun: 'Usa SOR na Peia se quiser' },
+          { arma: 'Rezas & Magia Elemental', atq: 'Atributo indicado', dano: 'Por magia', mun: '-1 PM (custo 3+, mín 1)' },
+          { arma: '', atq: '', dano: '', mun: '' }
+        ],
+        startingGear: 'Garrafadas místicas, Ervas da Jurema, Patuá bento, Pexeira.'
+      },
+      arqueiro: {
+        id: 'arqueiro',
+        name: 'Arqueiro / Ladino (Caçador)',
+        subtitle: 'Batedor silencioso dos lajedos, mestre em arcos de madeira-de-lei, baladeiras e furtividade.',
+        pvBonus: 4,
+        pmBonus: 2,
+        juizoBonus: 0,
+        defaultArmorCA: 0,
+        specialties: 'Furtividade (+2), Rastreio (+2), Arrombamento (+2), Pontaria (+2)',
+        classBonusText: '+4 PV, +2 PM; +2 em Furtividade, Rastreio, Arrombamento e Pontaria; Ataque Furtivo (+1d6 extra, +2d6 no meio da campanha).',
+        bullets: [
+          '+4 PV, +2 PM e +2 em Furtividade, Rastreio, Arrombamento e Pontaria.',
+          'Ataque Furtivo: Ao atacar de surpresa, escondido ou flanqueando alvo distraído por aliado, causa +1d6 de dano extra (aumenta para +2d6 no meio da campanha).'
+        ],
+        suggestedStats: { for: 3, def: 4, int: 7, sor: 6 },
+        startingWeapons: [
+          { arma: 'Arco de Madeira-de-Lei', atq: '1d20+INT', dano: '1d8 (+1d6)', mun: 'Flechas / Ataque Furtivo' },
+          { arma: 'Baladeira / Facas Arrem.', atq: '1d20+INT/FOR', dano: '1d4 / 1d6', mun: 'Silenciosa' },
+          { arma: 'Pexeira', atq: '1d20+FOR', dano: '1d6+FOR', mun: 'Reserva' }
+        ],
+        startingGear: 'Arco de madeira-de-lei, Aljava de flechas, Baladeira de ferro, Facas de arremesso.'
+      }
+    };
+
+    const PACTOS = {
+      cetico: {
+        id: 'cetico',
+        name: 'Cético / Sem Pacto',
+        title: 'Confiando apenas na própria pele',
+        dom: 'Ganha +1 ponto de Atributo extra na criação (total de 21 pontos).',
+        tabu: 'Nenhum. Não depende de entidades nem sofre penitências.',
+        unlocksWater: false,
+        favors: [],
+        caBonus: 0,
+        inicBonus: 0
+      },
+      sao_jorge: {
+        id: 'sao_jorge',
+        name: '1. São Jorge / São Salomão',
+        title: 'O Mistério do "Corpo Fechado"',
+        dom: 'Sua pele não entrega o sangue fácil. Ganha +2 CA permanente e, 1 vez por combate, pode anular completamente o dano de uma bala ou corte comum.',
+        tabu: 'Jamais atacar um oponente pelas costas ou recusar proteção a um inocente encurralado.',
+        unlocksWater: false,
+        favors: [],
+        caBonus: 2,
+        inicBonus: 0
+      },
+      besouro: {
+        id: 'besouro',
+        name: '2. Besouro Mangangá',
+        title: 'O Espírito Invulnerável da Roda',
+        dom: 'Ataques desarmados e chutes causam 1d8 + FOR de dano e você nunca é derrubado ou agarrado facilmente (+3 contra manobras). Pode se tornar uma silhueta de besouro por 1 turno (1x/dia) para atravessar cercos.',
+        tabu: 'Nunca vestir armaduras pesadas de metal nem recusar um duelo justo de mão limpa.',
+        unlocksWater: false,
+        favors: [],
+        caBonus: 0,
+        inicBonus: 0
+      },
+      padim_cicero: {
+        id: 'padim_cicero',
+        name: '3. Meu Padrinho Cícero',
+        title: 'O Patriarca Espiritual do Sertão',
+        dom: 'Voz de autoridade e fé inabalável. Aliados a até 10m ganham +2 em testes contra Medo/Juízo. 1 vez por descanso, pode benzer um aliado para curar 1d6 + INT de PV e 1d4 de Juízo.',
+        tabu: 'Nunca executar quem já se rendeu ou negar água/esmola a um retirante.',
+        unlocksWater: false,
+        favors: [],
+        caBonus: 0,
+        inicBonus: 0
+      },
+      santa_agueda: {
+        id: 'santa_agueda',
+        name: '4. Santa Águeda / Santana do Seridó',
+        title: 'A Senhora das Águas e da Proteção Sertaneja',
+        dom: 'Desbloqueia o elemento raro ÁGUA. Suas magias de cura ou proteção adicionam +3 no resultado. Você sofre metade do dano por fogo e insolação.',
+        tabu: 'Jamais desperdiçar água potável ou sujar poços, rios e cacimbas.',
+        unlocksWater: true,
+        favors: ['Água'],
+        caBonus: 0,
+        inicBonus: 0
+      },
+      jararaca: {
+        id: 'jararaca',
+        name: '5. Jararaca',
+        title: 'O Santo Valente dos Humildes',
+        dom: 'A coragem de quem não teme a morte. Quando estiver abaixo da metade do seu PV, ganha +2 em todos os ataques e +3 na rolagem da Última Peia.',
+        tabu: 'Nunca roubar, extorquir ou ferir trabalhadores humildes e pobres.',
+        unlocksWater: false,
+        favors: [],
+        caBonus: 0,
+        inicBonus: 0
+      },
+      sao_jose: {
+        id: 'sao_jose',
+        name: '6. São José das Chuvas',
+        title: 'O Senhor do Equinócio e da Colheita',
+        dom: 'Desbloqueia o elemento raro ÁGUA e favorece FLORA. Sabe sempre onde há água e comida, lê o clima com 24h de antecedência e nunca sofre penalidade de terreno ruim ou neblina/chuva.',
+        tabu: 'Jamais queimar lavouras, matar gado sem necessidade ou ignorar o ciclo da natureza.',
+        unlocksWater: true,
+        favors: ['Água', 'Flora'],
+        caBonus: 0,
+        inicBonus: 0
+      },
+      mestres: {
+        id: 'mestres',
+        name: '7. Mestre Pastinha e Mestre Bimba',
+        title: 'Os Guardiões Ancestrais do Berimbau',
+        dom: 'Combate rítmico e esquiva acrobática. Ganha +3 em Iniciativa. Se desviar de um ataque corpo a corpo (ou vencer na Última Peia), pode dar um contra-ataque imediato ou se reposicionar sem sofrer ataques livres.',
+        tabu: 'Nunca usar venenos traiçoeiros contra adversários nem desrespeitar os mais velhos e a ancestralidade.',
+        unlocksWater: false,
+        favors: [],
+        caBonus: 0,
+        inicBonus: 3
+      },
+      malunguinho: {
+        id: 'malunguinho',
+        name: '8. Rei Malunguinho',
+        title: 'A Trindade da Jurema Sagrada',
+        dom: 'O mestre dos caminhos fechados (Exu, Caboclo e Mestre). Concede +2 em Alquimia/Magia. Pode enxergar espíritos, rastros ocultos da Butija e abrir qualquer tranca/caminho fechado (1x/dia via toque).',
+        tabu: 'Jamais trair um segredo de terreiro ou entrar em locais sagrados com intenções impuras.',
+        unlocksWater: false,
+        favors: [],
+        caBonus: 0,
+        inicBonus: 0
+      },
+      inhansa: {
+        id: 'inhansa',
+        name: '9. Inhansã / Santa Bárbara',
+        title: 'A Senhora das Tempestades e dos Mortos',
+        dom: 'Favorece AR e FOGO. Imune à condição Amedrontado diante de mortos-vivos ou tempestades. Seus ataques causam +1d6 de dano extra contra mortos-vivos, espíritos e criações alquímicas (como os capangas de Lampião!).',
+        tabu: 'Jamais fugir covardemente de uma tempestade ou mostrar desrespeito aos mortos.',
+        unlocksWater: false,
+        favors: ['Ar', 'Fogo'],
+        caBonus: 0,
+        inicBonus: 0
+      },
+      encantados: {
+        id: 'encantados',
+        name: '10. Os Encantados do Toré',
+        title: 'Caboclo Rei Canindé e Jurema Cabocla',
+        dom: 'Favorece FAUNA, FLORA e TERRA. Ganha +2 em Rastreio e Pontaria na caatinga. Animais naturais não o atacam sem provocação, e você pode conversar brevemente com eles para obter pistas.',
+        tabu: 'Nunca caçar por esporte ou derrubar árvores sagradas (Jurema, Juazeiro) sem permissão espiritual.',
+        unlocksWater: false,
+        favors: ['Fauna', 'Flora', 'Terra'],
+        caBonus: 0,
+        inicBonus: 0
+      }
+    };
+
+    const POWERS = [
+      // FOGO
+      { id: 'fogo_1', element: 'Fogo', badgeClass: 'badge-rust', icon: '🔥', name: 'Lâmina/Munição em Brasa', pm: 2, type: 'Ação Bônus', desc: 'Encanta sua arma corpo a corpo, punhos ou até 3 flechas/balas com brasas vivas pela cena. Seus ataques físicos causam +1d6 de dano de fogo. No crítico, o alvo pega fogo (1d4 por turno).' },
+      { id: 'fogo_2', element: 'Fogo', badgeClass: 'badge-rust', icon: '🔥', name: 'Sangue de Pólvora', pm: 3, type: 'Ação', desc: 'Seu corpo ferve com adrenalina ígnea por 3 turnos. Ganha +3 em FOR (aumenta acerto e dano físico) e +2 em Iniciativa, mas sofre -1 em testes de calma/furtividade.' },
+      { id: 'fogo_3', element: 'Fogo', badgeClass: 'badge-rust', icon: '🔥', name: 'Coice do Bacamarte Solar', pm: 3, type: 'Ataque Físico', desc: 'Ao golpear com faca, rifle ou coronhada, libera uma onda de choque explosiva à queima-roupa. Causa dano normal da arma + 2d6 de fogo e empurra o inimigo 3 metros para trás (DEF CD 14 para não cair).' },
+      { id: 'fogo_4', element: 'Fogo', badgeClass: 'badge-rust', icon: '🔥', name: 'Miragem de Calor', pm: 2, type: 'Reação/Buff', desc: 'O ar tremula ao seu redor distorcendo sua silhueta por 3 turnos. Ataques à distância contra você têm desvantagem (-3 na rolagem) e seus olhos captam assinaturas de calor (+3 em Percepção contra camuflados/escondidos no escuro).' },
+      { id: 'fogo_5', element: 'Fogo', badgeClass: 'badge-rust', icon: '🔥', name: 'Meteoro do Cangaço', pm: 4, type: 'Ataque Físico em Área', desc: 'Salta ou dispara um projétil em arco que explode ao tocar o chão/alvo. Todos num raio de 4m sofrem 3d6 de dano de fogo (DEF CD 15 reduz à metade), além do dano físico direto no alvo principal.' },
+
+      // ÁGUA
+      { id: 'agua_1', element: 'Água', badgeClass: 'badge-water', icon: '💧', name: 'Golpe de Sereno / Lâmina Fluida', pm: 2, type: 'Ataque Físico', desc: 'Sua faca, punho ou flecha move-se com pressão hidráulica cortante. O ataque ignora bônus de armadura física (gibão/escudos) e causa +1d6 de dano. Se acertar, o alvo testa FOR (CD 14) ou é desarmado/derrubado.' },
+      { id: 'agua_2', element: 'Água', badgeClass: 'badge-water', icon: '💧', name: 'Corpo de Cacimba', pm: 3, type: 'Ação Bônus', desc: 'Sua musculatura torna-se maleável e fresca como água corrente por 4 turnos. Ganha +3 na CA, resistência (metade do dano) contra Fogo e escapa automaticamente de qualquer agarrão ou corda.' },
+      { id: 'agua_3', element: 'Água', badgeClass: 'badge-water', icon: '💧', name: 'Batismo do Juazeiro', pm: 3, type: 'Ação', desc: 'Toca a si ou a um aliado com água energizada. Cura 2d6 + INT de PV, limpa venenos/sangramentos e restaura 1d4 pontos de Juízo ao acalmar a mente atormentada.' },
+      { id: 'agua_4', element: 'Água', badgeClass: 'badge-water', icon: '💧', name: 'Olho da Chuva', pm: 2, type: 'Concentração', desc: 'Sente a umidade e o pulsar do sangue de seres vivos a até 20m (mesmo atrás de paredes de barro ou neblina). Garante +3 em Percepção e Pontaria/Ataques físicos contra alvos vivos na área.' },
+      { id: 'agua_5', element: 'Água', badgeClass: 'badge-water', icon: '💧', name: 'Dilúvio do Açude', pm: 4, type: 'Ataque Físico/Área', desc: 'Golpeia o solo com uma arma ou dispara uma munição encantada que irrompe numa tromba d\'água. Causa 2d8 de dano de impacto num cone de 6m, apaga chamas e arrasta inimigos médios para longe (DEF CD 15).' },
+
+      // TERRA
+      { id: 'terra_1', element: 'Terra', badgeClass: 'badge-earth', icon: '🪨', name: 'Punho de Lajedo', pm: 2, type: 'Ataque Físico', desc: 'Reveste sua arma, flecha ou punho com granito puro. Ganha +3 de dano fixo e pode estilhaçar escudos, portas ou armas inimigas com facilidade. Se acertar, o alvo fica atordoado (-2 no próximo ataque).' },
+      { id: 'terra_2', element: 'Terra', badgeClass: 'badge-earth', icon: '🪨', name: 'Couro de Gibão Pedregoso', pm: 3, type: 'Ação Bônus', desc: 'Sua pele endurece como arenito do sertão por 1 combate. Ganha +3 na CA e Redução de Dano (RD) 3 contra cortes, socos e tiros comuns. (Reduz seu deslocamento levemente).' },
+      { id: 'terra_3', element: 'Terra', badgeClass: 'badge-earth', icon: '🪨', name: 'Rastro Sísmico', pm: 2, type: 'Passivo/Ativo (1 PM expandir)', desc: 'Descalço ou tocando a terra com a arma, sente vibrações no solo a até 30m. Detecta emboscadas subterrâneas, túneis secretos e ajuda a localizar baús e a própria Butija enterrada (+4 em busca!). Não é pego de surpresa em solo natural.' },
+      { id: 'terra_4', element: 'Terra', badgeClass: 'badge-earth', icon: '🪨', name: 'Estilhaço de Quartzo', pm: 3, type: 'Ataque Físico', desc: 'Bate no chão com força ou atira uma pedra/flecha carregada que explode em lâminas afiadas de pedra. Causa dano da arma + 2d6 perfurante no alvo principal e 1d6 em inimigos colados a ele.' },
+      { id: 'terra_5', element: 'Terra', badgeClass: 'badge-earth', icon: '🪨', name: 'Fenda do Sertão', pm: 4, type: 'Controle/Físico', desc: 'Golpeia a terra abrindo uma rachadura que fecha sobre as pernas de até 2 inimigos (DEF CD 15). Eles sofrem 2d6 de dano esmagador e ficam Presos (sem poder se mover), tornando-se alvos fáceis (+2 para aliados atacarem).' },
+
+      // AR
+      { id: 'ar_1', element: 'Ar', badgeClass: 'badge-air', icon: '💨', name: 'Corte do Vento Arisco', pm: 2, type: 'Ataque Físico', desc: 'Um golpe de pexeira ou punho corta o ar gerando uma lâmina de vácuo a até 4m (ou dobra o alcance de arcos/arremessos sem penalidade). Causa o dano físico da arma + 1d4 cortante.' },
+      { id: 'ar_2', element: 'Ar', badgeClass: 'badge-air', icon: '💨', name: 'Passo de Redemoinho', pm: 2, type: 'Ação Bônus', desc: 'Move-se como uma rajada invisível por 3 turnos. Seu deslocamento dobra, você não provoca ataques de oportunidade ao sair de perto de inimigos e recebe +2 em Esquiva/CA.' },
+      { id: 'ar_3', element: 'Ar', badgeClass: 'badge-air', icon: '💨', name: 'Sussurro da Caatinga', pm: 1, type: 'Utilidade/Percepção', desc: 'O vento traz vozes, cliques de gatilho e respirações a até 500m. Dá +4 em Percepção e Furtividade (abafa o som dos seus passos e disparos de arco/arma).' },
+      { id: 'ar_4', element: 'Ar', badgeClass: 'badge-air', icon: '💨', name: 'Trovoada de Santa Bárbara', pm: 3, type: 'Ataque Físico', desc: 'Infunde o golpe ou flecha com estática atmosférica. O impacto gera um trovão ensurdecedor: dano normal + 2d6 elétrico/sônico, empurra o inimigo 2 metros e deixa todos a até 3m surdos por 1 turno.' },
+      { id: 'ar_5', element: 'Ar', badgeClass: 'badge-air', icon: '💨', name: 'Sopro da Poeira Cega', pm: 3, type: 'Tático', desc: 'Gira sua capa ou golpeia o ar criando uma nuvem de poeira seca de 5m ao redor. Inimigos dentro ficam Cegos (-4 para atacar) e Ladinos/Cangaceiros ganham Vantagem / Ataque Furtivo automático dentro da nuvem.' },
+
+      // FAUNA
+      { id: 'fauna_1', element: 'Fauna', badgeClass: 'badge-fauna', icon: '🦂', name: 'Bote da Cascavel', pm: 2, type: 'Ataque Físico', desc: 'Golpe relâmpago com lâmina, flecha ou dardo envenenado com peçonha espiritual. Causa dano normal + 1d4 imediato e injeta veneno (1d6 de dano por 2 turnos se falhar em DEF CD 14).' },
+      { id: 'fauna_2', element: 'Fauna', badgeClass: 'badge-fauna', icon: '🦂', name: 'Vigor do Boi Zebu / Tatu', pm: 3, type: 'Ação Bônus', desc: 'Por 4 turnos, escolha um aspecto: Boi Zebu (+3 em FOR e não pode ser parado ao investir) OU Tatu-Bola (+4 em DEF contra ataques e explosões).' },
+      { id: 'fauna_3', element: 'Fauna', badgeClass: 'badge-fauna', icon: '🦂', name: 'Olho de Carcará e Faro de Guariba', pm: 2, type: 'Buff de Percepção', desc: 'Seus sentidos ficam selvagens por 1 cena. Enxerga perfeitamente na escuridão total, ganha +4 em Percepção/Rastreio e sua margem de Crítico com arcos ou golpes precisos passa a ser 19 ou 20 no dado!' },
+      { id: 'fauna_4', element: 'Fauna', badgeClass: 'badge-fauna', icon: '🦂', name: 'Chamado do Bando', pm: 3, type: 'Ação', desc: 'Atrai animais reais ou espíritos de bichos da caatinga (escorpiões, morcegos, cães selvagens ou urubus) por 3 turnos. Eles atrapalham até 2 inimigos (-2 nas defesas deles) e garantem Flanqueamento.' },
+      { id: 'fauna_5', element: 'Fauna', badgeClass: 'badge-fauna', icon: '🦂', name: 'Fúria da Onça-Parda', pm: 4, type: 'Ataque Físico', desc: 'Avança num bote feroz realizando 2 ataques corpo a corpo completos no mesmo turno com garras, adaga ou pexeira. Se ambos acertarem o mesmo alvo, rasga a carne e recupera 1d6 PV.' },
+
+      // FLORA
+      { id: 'flora_1', element: 'Flora', badgeClass: 'badge-flora', icon: '🌵', name: 'Espinhos de Mandacaru', pm: 2, type: 'Buff Físico/Arma', desc: 'Espinhos negros brotam da sua roupa e arma pela cena. Seus ataques físicos causam +1d4 perfurante, e qualquer inimigo que acertar você corpo a corpo sofre 1d6 de dano de espinhos automaticamente.' },
+      { id: 'flora_2', element: 'Flora', badgeClass: 'badge-flora', icon: '🌵', name: 'Raízes da Baraúna', pm: 3, type: 'Ação Bônus', desc: 'Raízes prendem seus pés ao solo firme. Enquanto não sair do lugar: é imune a empurrões/quedas, ganha +3 em FOR (excelente na Última Peia!) e regenera 2 PV por turno.' },
+      { id: 'flora_3', element: 'Flora', badgeClass: 'badge-flora', icon: '🌵', name: 'Sopro de Jurema Sagrada', pm: 2, type: 'Controle/Percepção', desc: 'Assopra pó de jurema à curta distância (ou numa ponta de flecha). Revela ilusões, disfarces e armadilhas ocultas num cone de 6m; inimigos atingidos testam INT (CD 14) ou sofrem alucinações por 2 turnos (-3 em ataques e testes).' },
+      { id: 'flora_4', element: 'Flora', badgeClass: 'badge-flora', icon: '🌵', name: 'Cipó de Xique-Xique', pm: 3, type: 'Ataque Físico/Tático', desc: 'Dispara vinhas espinhosas da manga ou junto com uma flecha a até 10m. Causa 1d6 de dano e puxa o inimigo para perto de você ou o prende no lugar (FOR CD 14 para soltar).' },
+      { id: 'flora_5', element: 'Flora', badgeClass: 'badge-flora', icon: '🌵', name: 'Casca de Angico', pm: 3, type: 'Alquimia/Buff', desc: 'Secreta uma seiva cicatrizante que envolve a si ou a um aliado. Cura 1d8 PV, estanca hemorragias graves e confere +2 CA e resistência a venenos por 1 cena.' },
+
+      // NÃO-MÁGICAS
+      { id: 'nm_1', element: 'Não-Mágica', badgeClass: 'badge-steel', icon: '🛠️', name: 'Mestre da Pexeira', pm: 0, type: 'Passiva Marcial', desc: 'Ganha +2 em todos os ataques com facas e +3 nas rolagens da Última Peia. Se vencer uma rodada na Última Peia, o inimigo também sangra (-2 PV no turno seguinte).' },
+      { id: 'nm_2', element: 'Não-Mágica', badgeClass: 'badge-steel', icon: '🛠️', name: 'Tiro de Misericórdia', pm: 0, type: 'Técnica de Mira', desc: 'Com armas de fogo ou arcos, ignora cobertura parcial do inimigo. Pode assumir -3 no ataque para mirar numa parte específica (mão para desarmar, perna para derrubar, cabeça para +2d6 de dano).' },
+      { id: 'nm_3', element: 'Não-Mágica', badgeClass: 'badge-steel', icon: '🛠️', name: 'Pólvora e Alambique de Combate', pm: 0, type: 'Ofício em Descanso', desc: 'Você sabe fabricar granadas caseiras (fumaça ou estilhaço 2d6), unguentos curativos (1d8+2 PV) e ácidos improvisados durante descansos.' },
+      { id: 'nm_4', element: 'Não-Mágica', badgeClass: 'badge-steel', icon: '🛠️', name: 'Couro Duro do Sertão', pm: 0, type: 'Passiva (+6 PV)', desc: 'Ganha +6 PV máximos adicionais e +2 em testes de DEF contra sede, cansaço, venenos e choque (não desmaia fácil com Ferimento Grave).' },
+      { id: 'nm_5', element: 'Não-Mágica', badgeClass: 'badge-steel', icon: '🛠️', name: 'Olho de Rastejador', pm: 0, type: 'Passiva / Emboscada', desc: 'Nunca é surpreendido por emboscadas. Ganha +3 em Investigação, Rastreio e Percepção (pistas, cofres falsos, armadilhas e a Butija) e +1d6 de dano contra quem ainda não agiu no combate.' },
+      { id: 'nm_6', element: 'Não-Mágica', badgeClass: 'badge-steel', icon: '🛠️', name: 'Língua de Prata e Gaita/Violão', pm: 0, type: 'Social / Acampamento', desc: 'Ganha +3 em Persuasão, Barganha no Mercado Negro e Intimidação. Em acampamentos, sua música ou causos restauram 1d4+1 de Juízo de todo o bando!' },
+      { id: 'nm_7', element: 'Não-Mágica', badgeClass: 'badge-steel', icon: '🛠️', name: 'Mão Rápida & Esquiva de Gato', pm: 0, type: 'Passiva Ágil', desc: 'Pode recarregar armas de fogo/arcos como ação livre, sacar armas instantaneamente e atirar à queima-roupa corpo a corpo sem sofrer penalidade.' }
+    ];
+
+    const ELEMENTS = ['Todos', 'Fogo', 'Água', 'Terra', 'Ar', 'Fauna', 'Flora', 'Não-Mágica'];
+
+    // =========================================================================
+    // ESTADO DA FICHA
+    // =========================================================================
+    const STORAGE_KEY = 'butija_lampiao_sheet_v1';
+
+    const DEFAULT_STATE = {
+      name: 'Zé Cascavel',
+      player: '',
+      level: 1,
+      classId: 'cangaceiro',
+      pactId: 'sao_jorge',
+      pactStatus: 'em_dia',
+      armorBonus: 2,
+      attrs: { for: 7, def: 6, int: 3, sor: 4 },
+      powers: ['fogo_1', 'nm_1', 'nm_4'],
+      allowWaterByMaster: false,
+      pvCur: null,
+      pmCur: null,
+      sanCur: null,
+      luckUsed: 0,
+      graveWound: false,
+      peiaUsed: false,
+      peixeiraSagrada: false,
+      map1: false,
+      map2: false,
+      map3: false,
+      forja1: false,
+      forja2: false,
+      forja3: false,
+      money: '50 Réis',
+      water: 'Cheio',
+      gear: CLASSES.cangaceiro.startingGear,
+      notes: '',
+      weapons: JSON.parse(JSON.stringify(CLASSES.cangaceiro.startingWeapons))
+    };
+
+    let state = loadState();
+    let activeElementFilter = 'Todos';
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return JSON.parse(JSON.stringify(DEFAULT_STATE));
+        const parsed = JSON.parse(raw);
+        return { ...JSON.parse(JSON.stringify(DEFAULT_STATE)), ...parsed };
+      } catch {
+        return JSON.parse(JSON.stringify(DEFAULT_STATE));
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch {}
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // =========================================================================
+    // CARREGAMENTO DAS IMAGENS (URLS DIRETAS + FALLBACK LOCAL/ARQUIVO)
+    // =========================================================================
+    function setupImageLoader(imgId, fallbackId, dropzoneId, inputIds, candidatePaths, storageKey) {
+      const imgEl = document.getElementById(imgId);
+      const fallbackEl = document.getElementById(fallbackId);
+      const dropzoneEl = document.getElementById(dropzoneId);
+      if (!imgEl || !fallbackEl) return;
+
+      const primaryUrl = imgEl.getAttribute('src') || '';
+      const allCandidates = primaryUrl ? [primaryUrl, ...candidatePaths] : [...candidatePaths];
+
+      function showFallback() {
+        imgEl.style.display = 'none';
+        fallbackEl.classList.add('visible');
+      }
+
+      function showImage(src) {
+        imgEl.onload = () => {
+          imgEl.style.display = 'block';
+          fallbackEl.classList.remove('visible');
+        };
+        imgEl.onerror = () => tryNextCandidate();
+        imgEl.src = src;
+      }
+
+      let idx = 0;
+      function tryNextCandidate() {
+        if (idx < allCandidates.length) {
+          const nextPath = allCandidates[idx++];
+          imgEl.onerror = () => tryNextCandidate();
+          imgEl.onload = () => {
+            imgEl.style.display = 'block';
+            fallbackEl.classList.remove('visible');
+          };
+          imgEl.src = nextPath;
+        } else {
+          showFallback();
+        }
+      }
+
+      function applyFile(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          imgEl.onerror = null;
+          imgEl.onload = () => {
+            imgEl.style.display = 'block';
+            fallbackEl.classList.remove('visible');
+          };
+          imgEl.src = dataUrl;
+          try { localStorage.setItem(storageKey, dataUrl); } catch {}
+        };
+        reader.readAsDataURL(file);
+      }
+
+      let customSaved = '';
+      try { customSaved = localStorage.getItem(storageKey) || ''; } catch {}
+      if (customSaved) {
+        showImage(customSaved);
+      } else {
+        tryNextCandidate();
+      }
+
+      inputIds.forEach(inputId => {
+        const input = document.getElementById(inputId);
+        if (!input) return;
+        input.addEventListener('change', (e) => applyFile(e.target.files?.[0]));
+      });
+
+      if (dropzoneEl) {
+        dropzoneEl.addEventListener('dragover', (e) => e.preventDefault());
+        dropzoneEl.addEventListener('drop', (e) => {
+          e.preventDefault();
+          applyFile(e.dataTransfer.files?.[0]);
+        });
+      }
+    }
+
+    setupImageLoader('coverImg', 'coverFallback', 'coverDropzone', ['coverInput', 'coverInputAlt'], ['capa.png', 'capa.jpg', 'capa.jpeg', 'capa.webp'], 'butija_custom_cover_v3');
+    setupImageLoader('sceneImg', 'sceneFallback', 'sceneDropzone', ['sceneInput'], ['cenario.png', 'cenario.jpg', 'cenario.jpeg', 'cenario.webp'], 'butija_custom_scene_v3');
+    setupImageLoader('ritualImg', 'ritualFallback', 'ritualDropzone', ['ritualInput', 'ritualInputAlt'], ['ritual.png', 'ritual.jpg', 'ritual.jpeg', 'ritual.webp'], 'butija_custom_ritual_v3');
+
+    // =========================================================================
+    // RENDERIZAÇÃO DAS SEÇÕES DE REGRAS (CLASSES, PACTOS, PODERES)
+    // =========================================================================
+    function renderClasses() {
+      const grid = document.getElementById('classesGrid');
+      grid.innerHTML = Object.values(CLASSES).map(cls => `
+        <article class="card class-card">
+          <div>
+            <span class="badge badge-gold">${escapeHtml(cls.id.toUpperCase())}</span>
+            <h3 style="margin-top:0.55rem;">${escapeHtml(cls.name)}</h3>
+            <p style="font-size:0.86rem; color:var(--text-muted);">${escapeHtml(cls.subtitle)}</p>
+            <ul class="class-bonuses">
+              ${cls.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="selectClassFromCard('${cls.id}')">
+            Escolher ${escapeHtml(cls.name.split(' ')[0])}
+          </button>
+        </article>
+      `).join('');
+    }
+
+    function renderPacts() {
+      const grid = document.getElementById('pactsGrid');
+      grid.innerHTML = Object.values(PACTOS).map(p => `
+        <article class="card pact-card">
+          <div>
+            <div style="display:flex; justify-content:space-between; gap:0.5rem; align-items:start;">
+              <h3>${escapeHtml(p.name)}</h3>
+              ${p.unlocksWater ? '<span class="badge badge-water">Libera Água</span>' : ''}
+              ${p.id === 'cetico' ? '<span class="badge badge-gold">+1 Atributo</span>' : ''}
+            </div>
+            <p style="font-size:0.82rem; color:var(--gold); margin-bottom:0.65rem; font-weight:600;">${escapeHtml(p.title)}</p>
+            <div class="pact-dom" style="margin-bottom:0.55rem;"><strong>Dom:</strong> ${escapeHtml(p.dom)}</div>
+            <div class="pact-tabu"><strong>Tabu:</strong> ${escapeHtml(p.tabu)}</div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="selectPactFromCard('${p.id}')">
+            Selecionar na Ficha
+          </button>
+        </article>
+      `).join('');
+    }
+
+    function renderElementTabs() {
+      const container = document.getElementById('elementFilterTabs');
+      container.innerHTML = ELEMENTS.map(el => {
+        const count = el === 'Todos' ? POWERS.length : POWERS.filter(p => p.element === el).length;
+        const label = el === 'Água' ? `💧 Água [Raro] (${count})` : `${el} (${count})`;
+        return `<button type="button" class="tab-btn ${activeElementFilter === el ? 'active' : ''}" onclick="setElementFilter('${el}')">${label}</button>`;
+      }).join('');
+    }
+
+    function renderPowersGrid() {
+      const grid = document.getElementById('powersGrid');
+      const query = (document.getElementById('powerSearch').value || '').toLowerCase().trim();
+      const pact = PACTOS[state.pactId] || PACTOS.cetico;
+      const isBruxo = state.classId === 'bruxo';
+
+      const filtered = POWERS.filter(p => {
+        const matchEl = activeElementFilter === 'Todos' || p.element === activeElementFilter;
+        const matchQuery = !query || p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query) || p.element.toLowerCase().includes(query);
+        return matchEl && matchQuery;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="card" style="grid-column:1/-1; text-align:center;">Nenhum poder encontrado com esse filtro.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const isSelected = state.powers.includes(p.id);
+        const isFavored = pact.favors && pact.favors.includes(p.element);
+        let pmLabel = p.pm > 0 ? `${p.pm} PM` : 'Passiva / Técnica';
+        if (isBruxo && p.pm >= 3) {
+          pmLabel = `${Math.max(1, p.pm - 1)} PM (Bruxo: ${p.pm}−1)`;
+        }
+        return `
+          <article class="card power-card ${isSelected ? 'selected-power' : ''}">
+            <div>
+              <div class="power-meta">
+                <span class="badge ${p.badgeClass}">${p.icon} ${escapeHtml(p.element)}</span>
+                <span style="font-weight:700; color:var(--gold-soft);">${escapeHtml(pmLabel)}</span>
+              </div>
+              <h3 style="margin-top:0.55rem;">${escapeHtml(p.name)}</h3>
+              <div style="font-size:0.76rem; color:var(--text-muted); margin-bottom:0.45rem;">
+                ${escapeHtml(p.type)} ${isFavored ? ' • <span style="color:#b5e893;">★ Favorecido pelo Pacto</span>' : ''}
+              </div>
+              <p class="power-desc">${escapeHtml(p.desc)}</p>
+            </div>
+            <button type="button" class="btn ${isSelected ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="togglePower('${p.id}')">
+              ${isSelected ? '✓ Na Ficha (Remover)' : '+ Adicionar à Ficha'}
+            </button>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // CÁLCULOS E VALIDAÇÕES DO CONSTRUTOR
+    // =========================================================================
+    function computeDerived() {
+      const cls = CLASSES[state.classId] || CLASSES.cangaceiro;
+      const pact = PACTOS[state.pactId] || PACTOS.cetico;
+      const pactActive = state.pactStatus === 'em_dia';
+      const hasCouroDuro = state.powers.includes('nm_4');
+      const hasMestrePexeira = state.powers.includes('nm_1');
+
+      const { for: f, def, int: i, sor } = state.attrs;
+      const maxAttrBudget = state.pactId === 'cetico' ? 21 : 20;
+      const spentPoints = f + def + i + sor;
+
+      const pvMax = 12 + (def * 2) + cls.pvBonus + (hasCouroDuro ? 6 : 0);
+      const pmMax = 8 + i + cls.pmBonus;
+      const sanMax = 10 + i + sor + cls.juizoBonus;
+      const pactCA = (pactActive ? pact.caBonus : 0);
+      const caTotal = 10 + def + (Number(state.armorBonus) || 0) + pactCA;
+      const luckMax = sor * 2;
+      const inic = pactActive ? pact.inicBonus : 0;
+
+      // Última Peia
+      const peiaAttr = (state.classId === 'alquimista' || state.classId === 'bruxo') ? Math.max(f, sor) : f;
+      const peiaClassBonus = state.classId === 'cangaceiro' ? 2 : 0;
+      const peiaSkillBonus = hasMestrePexeira ? 3 : 0;
+      const peiaDuelMod = peiaAttr + peiaClassBonus + peiaSkillBonus;
+      const peiaDmg = 6 + f;
+      const peiaCrit = 12 + (2 * f);
+
+      return {
+        cls, pact, pactActive, hasCouroDuro, hasMestrePexeira,
+        maxAttrBudget, spentPoints, pvMax, pmMax, sanMax, caTotal, luckMax, inic,
+        peiaDuelMod, peiaDmg, peiaCrit
+      };
+    }
+
+    function validatePowers() {
+      const pact = PACTOS[state.pactId] || PACTOS.cetico;
+      const chosen = state.powers.map(id => POWERS.find(p => p.id === id)).filter(Boolean);
+      const magicCounts = {};
+      chosen.forEach(p => {
+        if (p.element !== 'Não-Mágica') {
+          magicCounts[p.element] = (magicCounts[p.element] || 0) + 1;
+        }
+      });
+      const distinctElements = Object.keys(magicCounts);
+      const hasWater = (magicCounts['Água'] || 0) > 0;
+      const waterAllowed = pact.unlocksWater || state.allowWaterByMaster;
+
+      const errors = [];
+      if (chosen.length > 3) errors.push('Máximo de 3 habilidades na criação.');
+      if (distinctElements.length > 3) errors.push('Você não pode misturar mais de 3 elementos.');
+      if (distinctElements.length === 3) {
+        const hasRepeat = Object.values(magicCounts).some(c => c > 1);
+        if (hasRepeat) errors.push('Regra do Eclético: ao misturar 3 elementos, só pode escolher 1 magia de cada.');
+      }
+      if (hasWater && !waterAllowed) {
+        errors.push('Elemento Água é raro: exige Pacto de Santa Águeda / São José das Chuvas ou aprovação narrativa do Mestre.');
+      }
+      return { chosen, distinctElements, hasWater, waterAllowed, errors };
+    }
+
+    function updateAllUI() {
+      const d = computeDerived();
+      const pvVal = validatePowers();
+
+      // Preenche selects/inputs caso mudados via código
+      document.getElementById('inName').value = state.name;
+      document.getElementById('inPlayer').value = state.player;
+      document.getElementById('inLevel').value = state.level;
+      document.getElementById('inClass').value = state.classId;
+      document.getElementById('inPact').value = state.pactId;
+      document.getElementById('inArmorBonus').value = state.armorBonus;
+      document.getElementById('chkMasterWater').checked = state.allowWaterByMaster;
+      document.getElementById('inMoney').value = state.money;
+      document.getElementById('inWater').value = state.water;
+      document.getElementById('inGear').value = state.gear;
+      document.getElementById('inNotes').value = state.notes;
+
+      // Atributos
+      ['for', 'def', 'int', 'sor'].forEach(k => {
+        document.getElementById(`val-${k}`).textContent = state.attrs[k];
+      });
+      document.getElementById('pointsUsedLabel').textContent = d.spentPoints;
+      document.getElementById('pointsMaxLabel').textContent = d.maxAttrBudget;
+
+      const attrAlert = document.getElementById('attrAlert');
+      const diff = d.maxAttrBudget - d.spentPoints;
+      if (diff === 0) {
+        attrAlert.className = 'alert-box alert-ok';
+        attrAlert.textContent = `✓ Todos os ${d.maxAttrBudget} pontos foram distribuídos corretamente.`;
+      } else if (diff > 0) {
+        attrAlert.className = 'alert-box alert-warn';
+        attrAlert.textContent = `Ainda faltam distribuir ${diff} ponto(s) de atributo.`;
+      } else {
+        attrAlert.className = 'alert-box alert-warn';
+        attrAlert.textContent = `Você excedeu em ${Math.abs(diff)} ponto(s) o orçamento de ${d.maxAttrBudget} pts!`;
+      }
+
+      // Resumo Pacto
+      const pactSummary = document.getElementById('pactSummaryBox');
+      pactSummary.className = state.pactStatus === 'em_dia' ? 'alert-box alert-ok' : 'alert-box alert-warn';
+      pactSummary.innerHTML = `<strong>${escapeHtml(d.pact.name)}:</strong> ${escapeHtml(d.pact.dom)} <br><span style="opacity:0.9;"><strong>Tabu:</strong> ${escapeHtml(d.pact.tabu)}</span>`;
+
+      // Poderes selecionados
+      document.getElementById('powerCountLabel').textContent = pvVal.chosen.length;
+      const selList = document.getElementById('selectedPowersList');
+      if (!pvVal.chosen.length) {
+        selList.innerHTML = `<div style="font-size:0.82rem; color:var(--text-muted);">Nenhuma habilidade escolhida ainda. Selecione acima ou no Grimório.</div>`;
+      } else {
+        selList.innerHTML = pvVal.chosen.map(p => `
+          <div class="selected-chip">
+            <div>
+              <strong>${p.icon} ${escapeHtml(p.name)}</strong>
+              <span style="color:var(--text-muted); font-size:0.78rem;"> (${escapeHtml(p.element)} • ${p.pm > 0 ? p.pm + ' PM' : 'Não-Mágica'})</span>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="togglePower('${p.id}')">Remover</button>
+          </div>
+        `).join('');
+      }
+
+      const pAlert = document.getElementById('powerRuleAlert');
+      if (pvVal.errors.length) {
+        pAlert.className = 'alert-box alert-warn';
+        pAlert.innerHTML = `⚠️ ${pvVal.errors.map(escapeHtml).join(' ')}`;
+      } else {
+        pAlert.className = 'alert-box alert-ok';
+        pAlert.textContent = pvVal.distinctElements.length === 3
+          ? '✓ Regra do Eclético ativa (3 elementos, 1 magia de cada).'
+          : `✓ Combinação válida (${pvVal.distinctElements.length} elemento(s) mágico(s)).`;
+      }
+
+      // === ATUALIZAR FICHA OFICIAL ESPELHO ===
+      document.getElementById('sh-name').textContent = state.name || '—';
+      document.getElementById('sh-class').textContent = d.cls.name;
+      document.getElementById('sh-player').textContent = state.player || '—';
+      document.getElementById('sh-level').textContent = state.level || 1;
+      document.getElementById('sh-pact').textContent = d.pact.name;
+      document.getElementById('sh-dom').textContent = d.pact.dom;
+      document.getElementById('sh-tabu').textContent = d.pact.tabu;
+
+      document.querySelectorAll('input[name="pactStatus"]').forEach(r => {
+        r.checked = r.value === state.pactStatus;
+      });
+
+      document.getElementById('sh-for').textContent = state.attrs.for;
+      document.getElementById('sh-def').textContent = state.attrs.def;
+      document.getElementById('sh-int').textContent = state.attrs.int;
+      document.getElementById('sh-sor').textContent = state.attrs.sor;
+
+      document.getElementById('sh-pv-max').textContent = d.pvMax;
+      document.getElementById('sh-pm-max').textContent = d.pmMax;
+      document.getElementById('sh-san-max').textContent = d.sanMax;
+
+      const pvCurEl = document.getElementById('sh-pv-cur');
+      const pmCurEl = document.getElementById('sh-pm-cur');
+      const sanCurEl = document.getElementById('sh-san-cur');
+      pvCurEl.value = state.pvCur !== null ? state.pvCur : d.pvMax;
+      pmCurEl.value = state.pmCur !== null ? state.pmCur : d.pmMax;
+      sanCurEl.value = state.sanCur !== null ? state.sanCur : d.sanMax;
+
+      document.getElementById('sh-ca').textContent = d.caTotal;
+      document.getElementById('sh-inic').textContent = `+${d.inic}`;
+      document.getElementById('sh-equip-ca').textContent = (Number(state.armorBonus) || 0) + (d.pactActive ? d.pact.caBonus : 0);
+
+      // Reserva de sorte clicável
+      state.luckUsed = Math.min(state.luckUsed, d.luckMax);
+      document.getElementById('sh-luck-max').textContent = d.luckMax;
+      document.getElementById('sh-luck-rem').textContent = Math.max(0, d.luckMax - state.luckUsed);
+      const luckContainer = document.getElementById('sh-luck-boxes');
+      luckContainer.innerHTML = Array.from({ length: d.luckMax }, (_, idx) => {
+        const isUsed = idx < state.luckUsed;
+        return `<div class="luck-dot ${isUsed ? 'used' : ''}" title="Clique para marcar/desmarcar Sorte" onclick="toggleLuckDot(${idx})"></div>`;
+      }).join('');
+
+      // Última Peia
+      const peiaAttrTag = (state.classId === 'alquimista' || state.classId === 'bruxo') ? 'FOR/SOR' : 'FOR';
+      document.getElementById('sh-peia-duel').textContent = `1d20 + ${d.peiaDuelMod} (${peiaAttrTag})`;
+      document.getElementById('sh-peia-dmg').textContent = d.peiaDmg;
+      document.getElementById('sh-peia-crit').textContent = d.peiaCrit;
+
+      // Caçada & Bônus
+      document.getElementById('sh-specs').textContent = d.cls.specialties;
+      document.getElementById('sh-class-bonus').textContent = d.cls.classBonusText;
+
+      document.getElementById('chk-grave').checked = state.graveWound;
+      document.getElementById('chk-peia-used').checked = state.peiaUsed;
+      document.getElementById('chk-peixeira-sagrada').checked = state.peixeiraSagrada;
+      document.getElementById('chk-map1').checked = state.map1;
+      document.getElementById('chk-map2').checked = state.map2;
+      document.getElementById('chk-map3').checked = state.map3;
+      document.getElementById('chk-forja1').checked = state.forja1;
+      document.getElementById('chk-forja2').checked = state.forja2;
+      document.getElementById('chk-forja3').checked = state.forja3;
+
+      // Slots de poderes na ficha
+      const slotsEl = document.getElementById('sh-powers-slots');
+      slotsEl.innerHTML = [0, 1, 2].map(idx => {
+        const p = pvVal.chosen[idx];
+        if (!p) {
+          return `<div class="sheet-power-slot"><strong>${idx + 1}. (Espaço Vazio)</strong><span style="color:#856a4f;">Escolha no Construtor ou no Grimório.</span></div>`;
+        }
+        let pmCost = p.pm > 0 ? `${p.pm} PM` : 'Passiva';
+        if (state.classId === 'bruxo' && p.pm >= 3) pmCost = `${Math.max(1, p.pm - 1)} PM (Bruxo)`;
+        if (p.element === 'Água') pmCost += ' (+1 longe de água)';
+        return `
+          <div class="sheet-power-slot">
+            <strong>${idx + 1}. ${escapeHtml(p.name)}</strong>
+            <div style="font-size:0.66rem; color:#6b3e22; font-weight:700; margin-bottom:0.2rem;">${escapeHtml(p.element)} • ${escapeHtml(pmCost)}</div>
+            <div style="font-size:0.68rem; line-height:1.3;">${escapeHtml(p.desc)}</div>
+          </div>
+        `;
+      }).join('');
+
+      // Armas
+      const wBody = document.getElementById('sh-weapons-body');
+      wBody.innerHTML = state.weapons.map((w, idx) => `
+        <tr>
+          <td><input type="text" value="${escapeHtml(w.arma)}" oninput="updateWeapon(${idx}, 'arma', this.value)" placeholder="Arma" /></td>
+          <td><input type="text" value="${escapeHtml(w.atq)}" oninput="updateWeapon(${idx}, 'atq', this.value)" placeholder="1d20+..." /></td>
+          <td><input type="text" value="${escapeHtml(w.dano)}" oninput="updateWeapon(${idx}, 'dano', this.value)" placeholder="Dano" /></td>
+          <td><input type="text" value="${escapeHtml(w.mun)}" oninput="updateWeapon(${idx}, 'mun', this.value)" placeholder="Notas" /></td>
+        </tr>
+      `).join('');
+
+      document.getElementById('sh-money').textContent = state.money || '—';
+      document.getElementById('sh-water').textContent = state.water || '—';
+
+      renderPowersGrid();
+      saveState();
+    }
+
+    // =========================================================================
+    // AÇÕES INTERATIVAS
+    // =========================================================================
+    window.setElementFilter = function(el) {
+      activeElementFilter = el;
+      renderElementTabs();
+      renderPowersGrid();
+    };
+
+    window.selectClassFromCard = function(classId) {
+      applyClassChange(classId);
+      document.getElementById('construtor').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.selectPactFromCard = function(pactId) {
+      state.pactId = pactId;
+      updateAllUI();
+      document.getElementById('construtor').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    function applyClassChange(classId) {
+      state.classId = classId;
+      const cls = CLASSES[classId];
+      state.armorBonus = cls.defaultArmorCA;
+      state.gear = cls.startingGear;
+      state.weapons = JSON.parse(JSON.stringify(cls.startingWeapons));
+      state.pvCur = null;
+      state.pmCur = null;
+      state.sanCur = null;
+      updateAllUI();
+    }
+
+    window.togglePower = function(powerId) {
+      const idx = state.powers.indexOf(powerId);
+      if (idx >= 0) {
+        state.powers.splice(idx, 1);
+      } else {
+        if (state.powers.length >= 3) {
+          alert('Você já escolheu 3 poderes/habilidades! Remova um da ficha antes de adicionar outro.');
+          return;
+        }
+        state.powers.push(powerId);
+      }
+      updateAllUI();
+    };
+
+    window.toggleLuckDot = function(idx) {
+      if (idx < state.luckUsed) {
+        state.luckUsed = idx;
+      } else {
+        state.luckUsed = idx + 1;
+      }
+      updateAllUI();
+    };
+
+    window.updateWeapon = function(idx, key, val) {
+      state.weapons[idx][key] = val;
+      saveState();
+    };
+
+    function populateSelects() {
+      const classSel = document.getElementById('inClass');
+      classSel.innerHTML = Object.values(CLASSES).map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+
+      const pactSel = document.getElementById('inPact');
+      pactSel.innerHTML = Object.values(PACTOS).map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+
+      const quickPow = document.getElementById('quickPowerSelect');
+      quickPow.innerHTML = POWERS.map(p => `<option value="${p.id}">[${p.element}] ${escapeHtml(p.name)} (${p.pm > 0 ? p.pm + ' PM' : 'Não-Mágica'})</option>`).join('');
+    }
+
+    // Event Listeners do Construtor
+    document.getElementById('inName').addEventListener('input', e => { state.name = e.target.value; updateAllUI(); });
+    document.getElementById('inPlayer').addEventListener('input', e => { state.player = e.target.value; updateAllUI(); });
+    document.getElementById('inLevel').addEventListener('input', e => { state.level = Math.max(1, Number(e.target.value) || 1); updateAllUI(); });
+    document.getElementById('inClass').addEventListener('change', e => applyClassChange(e.target.value));
+    document.getElementById('inPact').addEventListener('change', e => { state.pactId = e.target.value; updateAllUI(); });
+    document.getElementById('inArmorBonus').addEventListener('input', e => { state.armorBonus = Math.max(0, Number(e.target.value) || 0); updateAllUI(); });
+    document.getElementById('chkMasterWater').addEventListener('change', e => { state.allowWaterByMaster = e.target.checked; updateAllUI(); });
+    document.getElementById('inMoney').addEventListener('input', e => { state.money = e.target.value; updateAllUI(); });
+    document.getElementById('inWater').addEventListener('input', e => { state.water = e.target.value; updateAllUI(); });
+    document.getElementById('inGear').addEventListener('input', e => { state.gear = e.target.value; saveState(); });
+    document.getElementById('inNotes').addEventListener('input', e => { state.notes = e.target.value; saveState(); });
+
+    document.getElementById('sh-pv-cur').addEventListener('input', e => { state.pvCur = e.target.value === '' ? null : Number(e.target.value); saveState(); });
+    document.getElementById('sh-pm-cur').addEventListener('input', e => { state.pmCur = e.target.value === '' ? null : Number(e.target.value); saveState(); });
+    document.getElementById('sh-san-cur').addEventListener('input', e => { state.sanCur = e.target.value === '' ? null : Number(e.target.value); saveState(); });
+
+    document.querySelectorAll('input[name="pactStatus"]').forEach(r => {
+      r.addEventListener('change', e => { state.pactStatus = e.target.value; updateAllUI(); });
+    });
+
+    const checkboxMap = {
+      'chk-grave': 'graveWound',
+      'chk-peia-used': 'peiaUsed',
+      'chk-peixeira-sagrada': 'peixeiraSagrada',
+      'chk-map1': 'map1',
+      'chk-map2': 'map2',
+      'chk-map3': 'map3',
+      'chk-forja1': 'forja1',
+      'chk-forja2': 'forja2',
+      'chk-forja3': 'forja3'
+    };
+    Object.entries(checkboxMap).forEach(([elId, key]) => {
+      document.getElementById(elId).addEventListener('change', e => {
+        state[key] = e.target.checked;
+        saveState();
+      });
+    });
+
+    document.querySelectorAll('.stepper button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const attr = btn.dataset.attr;
+        const delta = Number(btn.dataset.delta);
+        const next = state.attrs[attr] + delta;
+        if (next < 1 || next > 8) return;
+        state.attrs[attr] = next;
+        updateAllUI();
+      });
+    });
+
+    document.getElementById('btnSuggestStats').addEventListener('click', () => {
+      const cls = CLASSES[state.classId];
+      const base = { ...cls.suggestedStats };
+      if (state.pactId === 'cetico') {
+        const order = Object.keys(base).sort((a, b) => base[b] - base[a]);
+        for (const k of order) {
+          if (base[k] < 8) { base[k] += 1; break; }
+        }
+      }
+      state.attrs = base;
+      updateAllUI();
+    });
+
+    document.getElementById('btnAddQuickPower').addEventListener('click', () => {
+      const id = document.getElementById('quickPowerSelect').value;
+      if (!state.powers.includes(id)) togglePower(id);
+    });
+
+    document.getElementById('powerSearch').addEventListener('input', renderPowersGrid);
+
+    document.getElementById('btnResetChar').addEventListener('click', () => {
+      if (!confirm('Deseja zerar a ficha para os valores iniciais?')) return;
+      state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      updateAllUI();
+    });
+
+    document.getElementById('btnRandomChar').addEventListener('click', () => {
+      const names = ['Maria Bonita II', 'Lampiãozinho', 'Corisco das Almas', 'Chica da Jurema', 'Boticário Silvino', 'Cabo Severino', 'Rastejadora Lua'];
+      const classKeys = Object.keys(CLASSES);
+      const pactKeys = Object.keys(PACTOS);
+      const clsId = classKeys[Math.floor(Math.random() * classKeys.length)];
+      const pactId = pactKeys[Math.floor(Math.random() * pactKeys.length)];
+
+      state.name = names[Math.floor(Math.random() * names.length)];
+      state.classId = clsId;
+      state.pactId = pactId;
+      state.pactStatus = 'em_dia';
+      state.armorBonus = CLASSES[clsId].defaultArmorCA;
+      state.gear = CLASSES[clsId].startingGear;
+      state.weapons = JSON.parse(JSON.stringify(CLASSES[clsId].startingWeapons));
+
+      const base = { ...CLASSES[clsId].suggestedStats };
+      if (pactId === 'cetico') {
+        const k = Object.keys(base).find(x => base[x] < 8);
+        if (k) base[k] += 1;
+      }
+      state.attrs = base;
+
+      const pool = POWERS.filter(p => p.element !== 'Água' || PACTOS[pactId].unlocksWater);
+      const shuffled = [...pool].sort(() => Math.random() - 0.5);
+      const picked = [];
+      const els = new Set();
+      for (const p of shuffled) {
+        if (picked.length === 3) break;
+        if (p.element === 'Não-Mágica' || els.size < 2 || els.has(p.element)) {
+          picked.push(p.id);
+          if (p.element !== 'Não-Mágica') els.add(p.element);
+        }
+      }
+      state.powers = picked;
+      state.pvCur = null;
+      state.pmCur = null;
+      state.sanCur = null;
+      state.luckUsed = 0;
+      updateAllUI();
+    });
+
+    document.getElementById('btnCopySummary').addEventListener('click', async () => {
+      const d = computeDerived();
+      const pvVal = validatePowers();
+      const text = [
+        `🌵 *A BUTIJA DE LAMPIÃO — FICHA DE PERSONAGEM*`,
+        `• *Nome:* ${state.name || 'Sem nome'} (Nível ${state.level})`,
+        `• *Classe:* ${d.cls.name}`,
+        `• *Pacto:* ${d.pact.name} (${state.pactStatus === 'em_dia' ? 'Em Dia' : 'Quebrado'})`,
+        `• *Atributos:* FOR ${state.attrs.for} | DEF ${state.attrs.def} | INT ${state.attrs.int} | SOR ${state.attrs.sor}`,
+        `• *Status:* PV ${d.pvMax} | CA ${d.caTotal} | PM ${d.pmMax} | Juízo ${d.sanMax} | Sorte ${d.luckMax}`,
+        `• *Última Peia:* Duelo 1d20+${d.peiaDuelMod} | Dano ${d.peiaDmg} | Crítico ${d.peiaCrit}`,
+        `• *Poderes (3):* ${pvVal.chosen.map(p => p.name).join(', ') || 'Nenhum'}`,
+        `• *Equipamento:* ${state.gear}`
+      ].join('\n');
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Resumo da ficha copiado! Cole no WhatsApp ou Discord da mesa.');
+      } catch {
+        prompt('Copie o resumo abaixo:', text);
+      }
+    });
+
+    // =========================================================================
+    // ROLADOR DE DADOS DO SERTÃO
+    // =========================================================================
+    const diceDrawer = document.getElementById('diceDrawer');
+    const diceLog = document.getElementById('diceLog');
+    let lastRollContext = null;
+
+    document.getElementById('btnToggleDice').addEventListener('click', () => diceDrawer.classList.toggle('open'));
+    document.getElementById('btnCloseDice').addEventListener('click', () => diceDrawer.classList.remove('open'));
+
+    function rollDie(sides) {
+      return Math.floor(Math.random() * sides) + 1;
+    }
+
+    function performRoll(isForced = false) {
+      const attrKey = document.getElementById('diceAttr').value;
+      const attrVal = attrKey === 'none' ? 0 : (state.attrs[attrKey] || 0);
+      const extra = Number(document.getElementById('diceBonus').value) || 0;
+      const cd = Number(document.getElementById('diceCD').value) || 0;
+
+      const d20 = rollDie(20);
+      const total = d20 + attrVal + extra;
+
+      let statusText = '';
+      if (d20 === 20) statusText = `<span style="color:#b5e893; font-weight:700;">CRÍTICO NATURAL (20)! Dobra dados de dano/efeito!</span>`;
+      else if (d20 === 1) statusText = `<span style="color:#ff947a; font-weight:700;">DESASTRE (1 NATURAL)! Falha catastrófica!</span>`;
+      else if (cd > 0) {
+        statusText = total >= cd
+          ? `<span style="color:#b5e893; font-weight:700;">SUCESSO contra CD ${cd}!</span>`
+          : `<span style="color:#ff947a; font-weight:700;">FALHA contra CD ${cd}.</span>`;
+      }
+
+      let forcedNote = '';
+      if (isForced) {
+        const cost = rollDie(4);
+        forcedNote = `<div style="color:#ffd18c; margin-bottom:0.35rem;">🔥 <strong>Rolagem Forçada:</strong> Custo imediato de <strong>-${cost} de Juízo ou PV</strong>! ${total < cd && cd > 0 ? '⚠️ Falhou na 2ª tentativa: DESASTRE SEVERO!' : ''}</div>`;
+      }
+
+      diceLog.innerHTML = `
+        ${forcedNote}
+        <div>🎲 <strong>1d20 (${d20})</strong> + Atributo (${attrVal}) + Bônus (${extra}) = <strong style="font-size:1.1rem; color:var(--gold-soft);">${total}</strong></div>
+        <div style="margin-top:0.25rem;">${statusText}</div>
+      `;
+      lastRollContext = { d20, total, cd };
+    }
+
+    document.getElementById('btnRollD20').addEventListener('click', () => performRoll(false));
+    document.getElementById('btnForceRoll').addEventListener('click', () => performRoll(true));
+    document.getElementById('btnRollPeia').addEventListener('click', () => {
+      const d = computeDerived();
+      const playerD20 = rollDie(20);
+      const enemyD20 = rollDie(20);
+      const pTotal = playerD20 + d.peiaDuelMod;
+      const eTotal = enemyD20 + 4; // Exemplo de inimigo médio (+4)
+      let outcome = '';
+      if (pTotal > eTotal) {
+        const isCrit = playerD20 === 20 || (pTotal - eTotal) >= 10;
+        outcome = `<span style="color:#b5e893;">Vitória na Trocação! Causa <strong>${isCrit ? d.peiaCrit + ' (CRÍTICO!)' : d.peiaDmg}</strong> de dano na pexeira.</span>`;
+      } else if (eTotal > pTotal) {
+        outcome = `<span style="color:#ff947a;">O inimigo venceu a disputa! Você sofre 6 + FOR do inimigo.</span>`;
+      } else {
+        outcome = `<span style="color:#ffd18c;">EMPATE! Choque de lâminas — teste de DEF CD 14 ou sofre -2 na próxima!</span>`;
+      }
+      diceLog.innerHTML = `
+        <div>🔪 <strong>Duelo da Última Peia:</strong></div>
+        <div>Você: 1d20(${playerD20}) + ${d.peiaDuelMod} = <strong>${pTotal}</strong> vs Inimigo (+4 ref.): <strong>${eTotal}</strong></div>
+        <div style="margin-top:0.25rem;">${outcome}</div>
+      `;
+    });
+
+    // =========================================================================
+    // INICIALIZAÇÃO
+    // =========================================================================
+    renderClasses();
+    renderPacts();
+    renderElementTabs();
+    populateSelects();
+    updateAllUI();
+  </script>
+</body>
+</html>
